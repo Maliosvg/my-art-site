@@ -21,12 +21,13 @@
 
 <div class="home-posts list-posts">
     <h2>最近作品</h2>
-    {{/* 这里的 range 会抓取所有普通文章页面 */}}
+    {{/* 这里的 range 会抓取 content 目录下所有的普通页面 */}}
     {{ range first 5 .Site.RegularPages }}
         <div class="post-item" style="margin-bottom: 20px;">
             <time>{{ .Date.Format "2006-01-02" }}</time>
             <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
         </div>
     {{ end }}
+</div>
 </div>
 {{ end }}
