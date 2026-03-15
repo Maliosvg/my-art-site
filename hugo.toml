@@ -1,4 +1,4 @@
-baseURL = 'https://my-art-site-navy.vercel.app/'
+baseURL = 'https://my-art-site-ashen.vercel.app/'
 languageCode = 'zh-cn'
 title = '我的艺术与文学'
 theme = 'gokarna'  # 注意：这里必须和 themes 文件夹里的名字一模一样
