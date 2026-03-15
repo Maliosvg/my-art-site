@@ -6,8 +6,9 @@
         background-size: 20px 20px !important;
         color: #e0e0e0 !important;
     }
-    .home-about h1 { font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; }
-    .post-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 0; }
+    .home-about h1 { font-weight: 300; letter-spacing: 0.2em; }
+    .post-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 0; display: flex; align-items: baseline; }
+    .post-item time { color: #666; margin-right: 20px; font-family: monospace; }
 </style>
 
 <section class="home-about">
@@ -20,18 +21,18 @@
 
     <h1>{{ .Site.Title }}</h1>
     {{ if .Site.Params.Description }}
-        <h2 style="font-weight: 300; opacity: 0.7;">{{ .Site.Params.Description }}</h2>
+        <h2 style="font-weight: 300; opacity: 0.7; font-size: 1.1em;">{{ .Site.Params.Description }}</h2>
     {{ end }}
 </section>
 
 <div class="home-posts list-posts" style="margin-top: 50px;">
     <h2 style="font-size: 1.2em; margin-bottom: 30px; opacity: 0.8;">最近作品</h2>
     
-    {{/* 强力抓取：只找 posts 目录下的文章 */}}
+    {{/* 暴力抓取：只要是 posts 文件夹里的文章通通显示 */}}
     {{ range (where .Site.RegularPages "Section" "posts") }}
         <div class="post-item">
-            <time style="color: #666; font-size: 0.9em; margin-right: 20px;">{{ .Date.Format "2006-01-02" }}</time>
-            <a href="{{ .RelPermalink }}" style="font-weight: 400; font-size: 1.1em; color: inherit; text-decoration: none;">
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+            <a href="{{ .RelPermalink }}" style="color: inherit; text-decoration: none; font-size: 1.1em;">
                 {{ .Title }}
             </a>
         </div>
