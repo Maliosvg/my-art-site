@@ -1,77 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8">
-    <title>{{ .Site.Title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* 全局艺术感背景 */
-        body {
-            background-color: #1a1a1a;
-            background-image: radial-gradient(#333 1px, transparent 1px);
-            background-size: 20px 20px;
-            color: #e0e0e0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding-top: 50px;
-        }
+    <meta charset="utf-8">
+    <title>{{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* 全局艺术感背景 */
+        body {
+            background-color: #1a1a1a;
+            background-image: radial-gradient(#333 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
 
-       <section class="home-about">
-        <div class="avatar">
-        {{/* 这里的 .Site.Params.avatarURL 必须和 hugo.toml 里的 key 完全一致 */}}
+<section class="home-about">
+    <div class="avatar">
+        {{/* 逻辑：优先读配置，没配置就强制读路径 */}}
         {{ if .Site.Params.avatarURL }}
-            {{/* 使用 absURL 确保从根目录开始查找图片 */}}
-            <img src="{{ .Site.Params.avatarURL | absURL }}" 
-                 alt="avatar" 
-                 onerror="this.src='/images/avatar.jpg';"> 
+            <img src="{{ .Site.Params.avatarURL | absURL }}" alt="avatar">
         {{ else }}
-            {{/* 如果上面失败，直接强制读取这个路径作为保底 */}}
             <img src="/images/avatar.jpg" alt="avatar">
         {{ end }}
-        </div>
-        <h1>{{ .Site.Title }}</h1>
-        {{ if .Site.Params.Description }}
-        <h2>{{ .Site.Params.Description }}</h2>
-        {{ end }}
-        </section>
-        /* 文章列表 */
-        .home-posts { width: 90%; max-width: 600px; }
-        .home-posts h2 { font-size: 1.2em; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; font-weight: 300; }
-        .post-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .post-item a { color: #eee; text-decoration: none; transition: 0.3s; }
-        .post-item a:hover { color: #3498db; padding-left: 5px; }
-        .post-item time { color: #555; font-family: monospace; }
-        
-        /* 响应式 */
-        @media (max-width: 600px) { .post-item { flex-direction: column; } }
-    </style>
+    </div>
+    <h1>{{ .Site.Title }}</h1>
+    {{ if .Site.Params.description }}
+    <h2>{{ .Site.Params.description }}</h2>
+    {{ end }}
+</section>
+        /* 文章列表 */
+        .home-posts { width: 90%; max-width: 600px; }
+        .home-posts h2 { font-size: 1.2em; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; font-weight: 300; }
+        .post-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .post-item a { color: #eee; text-decoration: none; transition: 0.3s; }
+        .post-item a:hover { color: #3498db; padding-left: 5px; }
+        .post-item time { color: #555; font-family: monospace; }
+        
+        /* 响应式 */
+        @media (max-width: 600px) { .post-item { flex-direction: column; } }
+    </style>
 </head>
 <body>
 
 <section class="home-about">
-    <div class="avatar">
-        {{ if .Site.Params.avatarURL }}
-        <img src="{{ .Site.Params.avatarURL | absURL }}" alt="avatar">
-        {{ end }}
-    </div>
-    <h1>{{ .Site.Title }}</h1>
-    {{ if .Site.Params.Description }}
-    <h2>{{ .Site.Params.Description }}</h2>
-    {{ end }}
+    <div class="avatar">
+        {{ if .Site.Params.avatarURL }}
+        <img src="{{ .Site.Params.avatarURL | absURL }}" alt="avatar">
+        {{ end }}
+    </div>
+    <h1>{{ .Site.Title }}</h1>
+    {{ if .Site.Params.Description }}
+    <h2>{{ .Site.Params.Description }}</h2>
+    {{ end }}
 </section>
 
 <div class="home-posts">
-    <h2>最近作品</h2>
-    {{ range (where .Site.RegularPages "Section" "posts") }}
-    <div class="post-item">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <time>{{ .Date.Format "2006-01-02" }}</time>
-    </div>
-    {{ end }}
+    <h2>最近作品</h2>
+    {{ range (where .Site.RegularPages "Section" "posts") }}
+    <div class="post-item">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <time>{{ .Date.Format "2006-01-02" }}</time>
+    </div>
+    {{ end }}
 </div>
 
 </body>

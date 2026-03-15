@@ -4,9 +4,9 @@ title = 'bluesquare'
 theme = 'gokarna'
 
 [params]
-  # --- 基础描述 ---
   description = "个人博客"
-  
+  avatarURL = "/images/avatar.jpg"  # 加上开头的斜杠
+  avatarSize = "size-m"             # gokarna主题通常用size-m, size-l等
   # --- 头像设置 (务必确保文件在 static/images/avatar.jpg) ---
   avatarURL = "images/avatar.jpg"
   avatarSize = "sz-50"
