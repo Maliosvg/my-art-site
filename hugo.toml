@@ -9,7 +9,7 @@ theme = 'gokarna'
   
   # --- 头像设置 (务必确保文件在 static/images/avatar.jpg) ---
   avatarURL = "images/avatar.jpg"
-  avatarSize = "sz-150"
+  avatarSize = "sz-50"
   avatarAltText = "My Avatar"
 
   # --- 功能开关 ---
