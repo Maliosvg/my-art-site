@@ -20,12 +20,24 @@
             padding-top: 50px;
         }
 
-        /* 头像与标题 */
-        .home-about { text-align: center; margin-bottom: 50px; }
-        .avatar img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 1px solid #333; }
-        h1 { font-weight: 300; letter-spacing: 0.2em; margin-top: 20px; text-transform: uppercase; }
-        h2 { font-weight: 200; opacity: 0.6; font-size: 1em; }
-
+       <section class="home-about">
+        <div class="avatar">
+        {{/* 这里的 .Site.Params.avatarURL 必须和 hugo.toml 里的 key 完全一致 */}}
+        {{ if .Site.Params.avatarURL }}
+            {{/* 使用 absURL 确保从根目录开始查找图片 */}}
+            <img src="{{ .Site.Params.avatarURL | absURL }}" 
+                 alt="avatar" 
+                 onerror="this.src='/images/avatar.jpg';"> 
+        {{ else }}
+            {{/* 如果上面失败，直接强制读取这个路径作为保底 */}}
+            <img src="/images/avatar.jpg" alt="avatar">
+        {{ end }}
+        </div>
+        <h1>{{ .Site.Title }}</h1>
+        {{ if .Site.Params.Description }}
+        <h2>{{ .Site.Params.Description }}</h2>
+        {{ end }}
+        </section>
         /* 文章列表 */
         .home-posts { width: 90%; max-width: 600px; }
         .home-posts h2 { font-size: 1.2em; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; font-weight: 300; }
