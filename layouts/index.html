@@ -21,14 +21,12 @@
 
 <div class="home-posts list-posts">
     <h2>最近作品</h2>
-    {{/* .Site.Pages 会抓取所有内容，包括草稿和未来的文章 */}}
-    {{ range .Site.Pages }}
-        {{ if eq .Type "posts" }}
+    {{/* 重点：只抓取真正的文章页面 (.RegularPages)，排除掉目录页面 */}}
+    {{ range first 5 .Site.RegularPages }}
         <div class="post-item" style="margin-bottom: 20px;">
             <time>{{ .Date.Format "2006-01-02" }}</time>
             <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
         </div>
-        {{ end }}
     {{ end }}
 </div>
 </div>
