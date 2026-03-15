@@ -5,7 +5,7 @@ theme = 'gokarna'
 
 [params]
   # --- 基础描述 ---
-  description = "独立与散落的艺术空间"
+  description = "个人博客算是吧"
   
   # --- 头像设置 (务必确保文件在 static/images/avatar.jpg) ---
   avatarURL = "images/avatar.jpg"
