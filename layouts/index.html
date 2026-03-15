@@ -1,3 +1,25 @@
+<style>
+    /* 强制全局深色网格背景 */
+    [data-theme="dark"], body.dark {
+        background-color: #1a1a1a !important;
+        background-image: radial-gradient(#333 1px, transparent 1px) !important;
+        background-size: 20px 20px !important;
+        color: #e0e0e0 !important;
+    }
+
+    /* 标题艺术感：更细、间距更大 */
+    .home-about h1, .home-posts h2 {
+        font-weight: 300 !important;
+        letter-spacing: 0.15em !important;
+        text-transform: uppercase;
+    }
+
+    /* 作品列表的呼吸感 */
+    .post-item {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        padding: 20px 0 !important;
+    }
+</style>
 {{ define "main" }}
 <section class="home-about">
     <div class="avatar">

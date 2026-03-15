@@ -699,44 +699,8 @@ table td {
       visibility: hidden;
   }
 }
-/* 深色模式下的高级灰背景 */
-[data-theme="dark"] body {
-    background-color: #1a1a1a; /* 接近黑色的深灰 */
-    color: #e0e0e0;           /* 柔和的白字 */
-}
-
-/* 浅色模式下的纸张质感 */
-[data-theme="light"] body {
-    background-color: #f5f5f7; /* 淡淡的冷灰白 */
-    color: #1d1d1f;
-}
-
-/* 让文章容器稍微浮起来，增加呼吸感 */
-.post, .home-about {
-    line-height: 1.8;
-    letter-spacing: 0.05em; /* 增加字间距，更有冷淡风格 */
-}
 .post-item {
     border-bottom: 1px solid rgba(128, 128, 128, 0.2); /* 极细的分界线 */
     padding: 15px 0;
     transition: all 0.3s ease;
-}
-
-.post-item:hover {
-    padding-left: 10px; /* 悬停时轻微左移，增加互动感 */
-}
-/* 给正文图片加一点点光晕，像在画廊里打灯一样 */
-.post-content img {
-    display: block;
-    margin: 40px auto; /* 自动居中 */
-    max-width: 90%;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* 深色投影 */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* 极细的边框 */
-}
-
-/* 让“散华”这个标题更有辨识度 */
-h1 {
-    font-weight: 300 !important; /* 让字体变细，增加冷淡感 */
-    letter-spacing: 0.2em;      /* 标题字间距再拉开一点 */
 }
