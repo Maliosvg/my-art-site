@@ -2,7 +2,7 @@
 <section class="home-about">
     <div class="avatar">
         {{ if .Site.Params.avatarURL }}
-        <img class="{{ .Site.Params.avatarSize | default "sz-150" }}" src="{{ .Site.Params.avatarURL | relURL }}" alt="avatar">
+        <img style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" src="{{ .Site.Params.avatarURL | relURL }}" alt="avatar"> src="{{ .Site.Params.avatarURL | relURL }}" alt="avatar">
         {{ end }}
     </div>
 
