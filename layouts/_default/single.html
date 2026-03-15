@@ -12,3 +12,11 @@
     </div>
 </article>
 {{ end }}
+{{ define "main" }}
+<div class="post">
+  <h1>{{ .Title }}</h1>
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+</div>
+{{ end }}
