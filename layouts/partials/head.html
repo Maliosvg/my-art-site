@@ -59,3 +59,35 @@
     {{ .Site.Params.CustomHeadHTML | safeHTML }}
     {{ end }}
 </head>
+<style>
+    /* 强制深色模式背景与网格 */
+    [data-theme="dark"], body.dark {
+        background-color: #1a1a1a !important;
+        background-image: radial-gradient(#333 1px, transparent 1px) !important;
+        background-size: 20px 20px !important;
+        color: #e0e0e0 !important;
+    }
+
+    /* 标题冷淡风微调 */
+    h1 {
+        font-weight: 300 !important;
+        letter-spacing: 0.15em !important;
+    }
+
+    /* 最近作品列表交互 */
+    .post-item {
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2) !important;
+        padding: 15px 0 !important;
+        transition: all 0.3s ease !important;
+    }
+    .post-item:hover {
+        padding-left: 10px !important;
+    }
+
+    /* 详情页图片高级感 */
+    .post-content img {
+        margin: 40px auto !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+</style>

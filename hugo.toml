@@ -1,11 +1,11 @@
 baseURL = 'https://my-art-site-ashen.vercel.app/'
 languageCode = 'zh-cn'
-title = '散华'
+title = 'bluesquare'
 theme = 'gokarna'
 
 [params]
   # --- 基础描述 ---
-  description = "个人博客算是吧"
+  description = "个人博客"
   
   # --- 头像设置 (务必确保文件在 static/images/avatar.jpg) ---
   avatarURL = "images/avatar.jpg"
