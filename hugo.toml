@@ -1,19 +1,23 @@
 baseURL = 'https://my-art-site-ashen.vercel.app/'
 languageCode = 'zh-cn'
-title = 'bluesquare'
+title = '散华'
 theme = 'gokarna'
 
 [params]
+  # --- 基础描述 ---
   description = "独立与散落的艺术空间"
-  # 头像
-  avatarURL = "images/touxiang.jpg"
+  
+  # --- 头像设置 (务必确保文件在 static/images/avatar.jpg) ---
+  avatarURL = "images/avatar.jpg"
   avatarSize = "sz-150"
-  
-  # 功能开关
-  showThemeSwitcher = true
-  showPostsOnHomePage = "recent"
-  
-  # 社交图标（可选）
+  avatarAltText = "My Avatar"
+
+  # --- 功能开关 ---
+  showThemeSwitcher = true         # 开启黑白切换
+  showPostsOnHomePage = "recent"   # 主页显示最近文章
+  numberPostsOnHomePage = 5        # 显示的数量
+
+  # --- 社交图标 (可选) ---
   [[params.socialIcons]]
     name = "X"
     url = "bluesquare1668"
