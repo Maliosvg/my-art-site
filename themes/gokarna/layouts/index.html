@@ -1,41 +1,66 @@
-{{ define "main" }}
-<style>
-    [data-theme="dark"], body.dark {
-        background-color: #1a1a1a !important;
-        background-image: radial-gradient(#333 1px, transparent 1px) !important;
-        background-size: 20px 20px !important;
-        color: #e0e0e0 !important;
-    }
-    .home-about h1 { font-weight: 300; letter-spacing: 0.2em; }
-    .post-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 0; display: flex; align-items: baseline; }
-    .post-item time { color: #666; margin-right: 20px; font-family: monospace; }
-</style>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>{{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* 全局艺术感背景 */
+        body {
+            background-color: #1a1a1a;
+            background-image: radial-gradient(#333 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+
+        /* 头像与标题 */
+        .home-about { text-align: center; margin-bottom: 50px; }
+        .avatar img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 1px solid #333; }
+        h1 { font-weight: 300; letter-spacing: 0.2em; margin-top: 20px; text-transform: uppercase; }
+        h2 { font-weight: 200; opacity: 0.6; font-size: 1em; }
+
+        /* 文章列表 */
+        .home-posts { width: 90%; max-width: 600px; }
+        .home-posts h2 { font-size: 1.2em; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; font-weight: 300; }
+        .post-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .post-item a { color: #eee; text-decoration: none; transition: 0.3s; }
+        .post-item a:hover { color: #3498db; padding-left: 5px; }
+        .post-item time { color: #555; font-family: monospace; }
+        
+        /* 响应式 */
+        @media (max-width: 600px) { .post-item { flex-direction: column; } }
+    </style>
+</head>
+<body>
 
 <section class="home-about">
     <div class="avatar">
         {{ if .Site.Params.avatarURL }}
-        <img style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" 
-             src="{{ .Site.Params.avatarURL | absURL }}" alt="avatar">
+        <img src="{{ .Site.Params.avatarURL | absURL }}" alt="avatar">
         {{ end }}
     </div>
-
     <h1>{{ .Site.Title }}</h1>
     {{ if .Site.Params.Description }}
-        <h2 style="font-weight: 300; opacity: 0.7; font-size: 1.1em;">{{ .Site.Params.Description }}</h2>
+    <h2>{{ .Site.Params.Description }}</h2>
     {{ end }}
 </section>
 
-<div class="home-posts list-posts" style="margin-top: 50px;">
-    <h2 style="font-size: 1.2em; margin-bottom: 30px; opacity: 0.8;">最近作品</h2>
-    
-    {{/* 暴力抓取：只要是 posts 文件夹里的文章通通显示 */}}
+<div class="home-posts">
+    <h2>最近作品</h2>
     {{ range (where .Site.RegularPages "Section" "posts") }}
-        <div class="post-item">
-            <time>{{ .Date.Format "2006-01-02" }}</time>
-            <a href="{{ .RelPermalink }}" style="color: inherit; text-decoration: none; font-size: 1.1em;">
-                {{ .Title }}
-            </a>
-        </div>
+    <div class="post-item">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <time>{{ .Date.Format "2006-01-02" }}</time>
+    </div>
     {{ end }}
 </div>
-{{ end }}
+
+</body>
+</html>
