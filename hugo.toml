@@ -1,10 +1,19 @@
 baseURL = 'https://my-art-site-ashen.vercel.app/'
 languageCode = 'zh-cn'
-title = '冷淡的温柔'
+title = 'bluesquare'
 theme = 'gokarna'
 
 [params]
   description = "独立与散落的艺术空间"
-  avatarURL = "images/avatar.jpg" # 确保图片在 static/images/ 文件夹下
+  # 头像
+  avatarURL = "images/touxiang.jpg"
   avatarSize = "sz-150"
-  # 哪怕你暂时没配置展示开关，我刚才的代码已经强制开启了“最近作品”展示
+  
+  # 功能开关
+  showThemeSwitcher = true
+  showPostsOnHomePage = "recent"
+  
+  # 社交图标（可选）
+  [[params.socialIcons]]
+    name = "X"
+    url = "bluesquare1668"
