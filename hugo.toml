@@ -1,21 +1,11 @@
 baseURL = 'https://my-art-site-ashen.vercel.app/'
 languageCode = 'zh-cn'
 title = '我的艺术与文学'
-theme = 'gokarna'  # 注意：这里必须和 themes 文件夹里的名字一模一样
+theme = 'gokarna'
 
 [params]
-    name = "你的名字"
-    description = "艺术 / 文学 / 思考"
-    avatarURL = "/images/avatar.png" # 以后可以放头像
-    showFooter = true
-    showThemeSwitcher = true # 允许读者切换深色/浅色模式
+  avatar = "/images/avatar.png"
+  description = "冷淡的温柔"
 
-[[menu.main]]
-    name = "文章"
-    url = "/posts"
-    weight = 1
-    
-[[menu.main]]
-    name = "分类"
-    url = "/categories"
-    weight = 2
+[outputs]
+  home = ["HTML", "RSS"]
