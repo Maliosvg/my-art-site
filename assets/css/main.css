@@ -699,8 +699,3 @@ table td {
       visibility: hidden;
   }
 }
-.post-item {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.2); /* 极细的分界线 */
-    padding: 15px 0;
-    transition: all 0.3s ease;
-}

@@ -1,21 +1,11 @@
 {{ define "main" }}
-<article class="post">
-    <header class="post-header">
-        <div class="avatar" style="text-align: center; margin-bottom: 20px;">
-            {{ if .Site.Params.avatarURL }}
-            <img style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;" 
-                 src="{{ .Site.Params.avatarURL | absURL }}" alt="avatar">
-            {{ end }}
-        </div>
-        
-        <h1 style="text-align: center;">{{ .Title }}</h1>
-        <div class="post-meta" style="text-align: center; color: #888;">
-            <time>{{ .Date.Format "2006-01-02" }}</time>
-        </div>
-    </header>
+    {{ if eq .Type "post" }}
+        {{- partial "post.html" . -}}
+        {{- partial "toc.html" . -}}
+    {{ end }}
 
-    <div class="post-content" style="margin-top: 40px;">
-        {{ .Content }}
-    </div>
-</article>
+    {{ if eq .Type "page" }}
+        {{- partial "page.html" . -}}
+        {{- partial "toc.html" . -}}
+    {{ end }}
 {{ end }}
