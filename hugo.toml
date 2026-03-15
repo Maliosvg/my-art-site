@@ -5,19 +5,14 @@ theme = 'gokarna'
 
 [params]
   description = "个人博客"
-  avatarURL = "/images/avatar.jpg"  # 加上开头的斜杠
-  avatarSize = "size-m"             # gokarna主题通常用size-m, size-l等
-  # --- 头像设置 (务必确保文件在 static/images/avatar.jpg) ---
-  avatarURL = "images/avatar.jpg"
-  avatarSize = "sz-50"
+  avatarURL = "/images/avatar.jpg"
+  avatarSize = "size-m"
   avatarAltText = "My Avatar"
 
-  # --- 功能开关 ---
-  showThemeSwitcher = true         # 开启黑白切换
-  showPostsOnHomePage = "recent"   # 主页显示最近文章
-  numberPostsOnHomePage = 5        # 显示的数量
+  showThemeSwitcher = true
+  showPostsOnHomePage = "recent"
+  numberPostsOnHomePage = 5
 
-  # --- 社交图标 (可选) ---
   [[params.socialIcons]]
     name = "X"
-    url = "bluesquare1668"
+    url = "https://x.com/bluesquare1668" # 建议写完整链接
