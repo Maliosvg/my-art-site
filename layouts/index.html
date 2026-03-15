@@ -3,8 +3,12 @@
     <div class="avatar">
 <div class="avatar">
     {{ if .Site.Params.avatarURL }}
-    <img class="{{ .Site.Params.avatarSize | default "sz-150" }}" src="{{ .Site.Params.avatarURL | relURL }}" alt="avatar">
+    <img class="{{ .Site.Params.avatarSize | default "sz-150" }}" 
+         src="{{ .Site.Params.avatarURL | relURL }}" 
+         alt="avatar" 
+         style="max-width: 150px; border-radius: 50%;"> 
     {{ end }}
+</div>
 </div>
 
     <h1>{{ .Site.Title }}</h1>
