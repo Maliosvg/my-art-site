@@ -2,6 +2,7 @@
 title: "网站的诞生"
 date: 2026-03-10
 type: "post"
+url: "/posts/1/"
 draft: false
 ---
 
