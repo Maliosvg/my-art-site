@@ -1,11 +1,10 @@
 baseURL = 'https://my-art-site-ashen.vercel.app/'
 languageCode = 'zh-cn'
-title = '我的艺术与文学'
+title = '冷淡的温柔'
 theme = 'gokarna'
 
 [params]
-  avatar = "/images/avatar.png"
-  description = "冷淡的温柔"
-
-[outputs]
-  home = ["HTML", "RSS"]
+  description = "独立与散落的艺术空间"
+  avatarURL = "images/avatar.jpg" # 确保图片在 static/images/ 文件夹下
+  avatarSize = "sz-150"
+  # 哪怕你暂时没配置展示开关，我刚才的代码已经强制开启了“最近作品”展示

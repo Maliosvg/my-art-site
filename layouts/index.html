@@ -1,27 +1,26 @@
 {{ define "main" }}
 <section class="home-about">
-	<div class="avatar">
-        {{ if isset .Site.Params "avatarurl" }}
-        <img class={{ .Site.Params.AvatarSize | default "size-m" }} src='{{ .Scratch.Get "avatarImgSrc" }}' alt="{{ .Site.Params.AvatarAltText|default "avatar" }}">
+    <div class="avatar">
+        {{ if .Site.Params.avatarURL }}
+        <img class="{{ .Site.Params.AvatarSize | default "sz-150" }}" src="{{ .Site.Params.avatarURL | relURL }}" alt="avatar">
         {{ end }}
-	</div>
+    </div>
 
     <h1>{{ .Site.Title }}</h1>
-    {{ if isset .Site.Params "description" }}
-        <h2>{{ .Site.Params.Description }}</h2>
+    {{ if .Site.Params.description }}
+        <h2>{{ .Site.Params.description }}</h2>
     {{ end }}
-
 </section>
 
 <div class="flex-break"></div>
 
-{{ if isset .Site.Params "socialicons" }}
+{{ if .Site.Params.socialIcons }}
 <div class="gk-social-icons">
     <ul class="gk-social-icons-list">
-        {{ range .Site.Params.SocialIcons }}
+        {{ range .Site.Params.socialIcons }}
         <li class="gk-social-icon">
-            <a href="{{ .url }}" target="_blank" rel="{{ if .rel }}{{ .rel }} {{ end }}noopener noreferrer" aria-label="Learn more on {{ .name }}">
-                <img class="svg-inject" src="{{ relURL "svg/icons/" }}{{ .name | lower }}.svg" alt="">
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+                {{ .name }}
             </a>
         </li>
         {{ end }}
@@ -29,31 +28,14 @@
 </div>
 {{ end }}
 
-{{ if (or
-    (and (fileExists "content/_index.md") .Content)
-    (fileExists "content/index-about.md")) }}
-        <section class="home-content">
-            {{ or .Content (readFile "index-about.md" | markdownify) }}
-        </section>
-{{ end }}
-
-{{ if isset .Site.Params "showpostsonhomepage" }}
-
-    <div class="home-posts list-posts">
-        <h2>{{ i18n (.Site.Params.ShowPostsOnHomePage | humanize) }}</h2>
-
-    {{ $posts := where .Site.Pages "Params.type" "post" }}
-
-    {{ if eq .Site.Params.ShowPostsOnHomePage "popular" }}
-        {{ range $posts.ByWeight | first (or .Site.Params.NumberPostsOnHomePage 4) }}
-            {{- partial "list-posts.html" . -}}
-        {{ end }}
-    {{ else if eq .Site.Params.ShowPostsOnHomePage "recent" }}
-        {{ range $posts.ByDate.Reverse | first (or .Site.Params.NumberPostsOnHomePage 4) }}
-            {{- partial "list-posts.html" . -}}
-        {{ end }}
+<div class="home-posts list-posts">
+    <h2>最近作品</h2>
+    {{ $posts := where .Site.RegularPages "Type" "posts" }}
+    {{ range first 5 $posts.ByDate.Reverse }}
+        <div class="post-item" style="margin-bottom: 20px;">
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+            <a href="{{ .Permalink }}"><h3>{{ .Title }}</h3></a>
+        </div>
     {{ end }}
-    </div>
-
-{{ end }}
+</div>
 {{ end }}

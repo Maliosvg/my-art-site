@@ -1,5 +1,7 @@
+---
+title: "我的第一件作品"
+date: 2026-03-16
 draft: false
-![我的画](/images/avatar.png)
-date: 2026-03-15
+---
 
 
