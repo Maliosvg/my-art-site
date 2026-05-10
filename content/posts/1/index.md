@@ -6,8 +6,8 @@ url: "/posts/1/"
 draft: false
 ---
 
-打破了常识的背后往往有着另一层常识。
+我的许多内容也许会在这里更新吧
 
 
-![seek](my-drawing.jpg)
+![seek]
 <p align="center" style="color: gray; font-size: 0.8em;">《网站的诞生》 2026</p>
