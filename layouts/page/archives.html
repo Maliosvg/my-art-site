@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="container">
+    <div class="post-header-section">
+        <h1>全部作品 (Archives)</h1>
+    </div>
+    <div class="post-content">
+        <div class="home-posts" style="width: 100%; margin: 0 auto;">
+            {{ range (.Site.RegularPages.GroupByDate "2006年01月") }}
+            <h2 class="section-title" style="margin-top: 50px;">{{ .Key }}</h2>
+            {{ range .Pages }}
+            <div class="post-item">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                <div class="dashed-line"></div>
+                <time>{{ .Date.Format "01-02" }}</time>
+            </div>
+            {{ end }}
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}

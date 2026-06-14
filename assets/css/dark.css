@@ -1,8 +1,8 @@
 :root {
-  --dark-primary-color: 34, 39, 46;
-  --dark-secondary-color: #2d333b;
-  --dark-tertiary-color: #646464;
-  --dark-text-color: white;
+  --dark-primary-color: 12, 13, 18;
+  --dark-secondary-color: 22, 25, 32;
+  --dark-tertiary-color: #3a3f4b;
+  --dark-text-color: #e8eaed;
 }
 
 html {
@@ -11,16 +11,24 @@ html {
   fill: var(--dark-text-color);
 }
 
+/* Header — dark glassmorphism */
 .header {
-  background-color: rgba(var(--dark-primary-color), 0.95);
+  background-color: rgba(var(--dark-primary-color), 0.55);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .nav-hamburger-list {
-  background: rgba(var(--dark-primary-color), 1);
+  background: rgba(var(--dark-primary-color), 0.92);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-bottom: solid 1px rgba(255, 255, 255, 0.04);
+  border-top: solid 1px rgba(255, 255, 255, 0.04);
 }
 
 .nav-links .nav-icons-divider {
-  color: var(--dark-secondary-color);
+  color: rgba(255, 255, 255, 0.1);
 }
 
 a:hover .feather-moon {
@@ -37,13 +45,17 @@ a:hover .feather-moon {
   fill: var(--accent-color);
 }
 
+.post-tags .post-tag {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
 .post-tags .post-tag:hover {
   background-color: var(--dark-text-color);
   color: rgb(var(--dark-primary-color));
 }
 
 .tags-list .post-tags .post-tag a .tag-posts-count {
-  background-color: var(--dark-secondary-color);
+  background-color: rgb(var(--dark-secondary-color));
 }
 
 .tags-list .post-tags .post-tag:hover a .tag-posts-count {
@@ -52,30 +64,31 @@ a:hover .feather-moon {
 }
 
 .footer {
-  border-top-color: var(--dark-header-bg-color);
+  border-top-color: rgba(255, 255, 255, 0.04);
 }
 
 blockquote {
-  color: darkgrey;
-  border-left-color: var(--dark-secondary-color);
+  color: #8a8f98;
+  border-left-color: rgba(52, 152, 219, 0.3);
 }
 
 hr {
   color: var(--dark-tertiary-color);
+  border-top-color: rgba(255, 255, 255, 0.06);
 }
 
 table thead {
-  background-color: var(--dark-secondary-color);
+  background-color: rgb(var(--dark-secondary-color));
 }
 
 table td,
 table th {
-  border-bottom-color: var(--dark-secondary-color);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
 code,
 pre {
-  background-color: var(--dark-secondary-color) !important;
+  background-color: rgb(var(--dark-secondary-color)) !important;
 }
 
 :not(pre) > code {
@@ -84,18 +97,19 @@ pre {
 }
 
 .header-shadow {
-  box-shadow: rgb(33, 38, 45) 0px -1px 0px 0px inset;
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.4);
 }
 
 .arrow-logo {
-  background-color: var(--dark-secondary-color);
+  background-color: rgb(var(--dark-secondary-color));
 }
 
-/* TODO: Check if this is needed or not */
-/*
-img,
-video {
-  filter: hue-rotate(180deg) contrast(100%) invert(100%);
-  -webkit-filter: hue-rotate(180deg) contrast(100%) invert(100%);
+/* Post accent line in dark */
+.post-header-section::after {
+  background: linear-gradient(90deg, rgba(60, 160, 255, 0.7), rgba(60, 160, 255, 0.05));
 }
-*/
+
+/* Post list hover in dark */
+.list-posts .post-title:hover {
+  background-color: rgba(60, 160, 255, 0.06);
+}

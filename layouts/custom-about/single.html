@@ -1,0 +1,129 @@
+{{ define "main" }}
+<div class="custom-about-page">
+    
+    <!-- Scrolling Blue Background -->
+    <div class="blue-scrolling-bg"></div>
+
+    <div class="about-text text-top">我是谁</div>
+    
+    <div class="center-content">
+        <div class="buttons-container" style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <a href="https://x.com/Bluesquare1668?s=20" target="_blank" class="twitter-btn-custom">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                Bluesquare1668
+            </a>
+            <a href="https://x.com/BONSQWQ?s=20" target="_blank" class="twitter-btn-custom">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+                BONSQWQ
+            </a>
+        </div>
+    </div>
+
+    <div class="about-text text-bottom">我也说不清</div>
+</div>
+
+<style>
+/* ===== Custom About Page ===== */
+.custom-about-page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 20px;
+    overflow: hidden;
+    margin-top: -100px; /* Offset the default baseof padding if any */
+}
+
+/* Horizontal Scrolling Blue Rectangle */
+@keyframes scrollBg {
+    0% { background-position: 0 0; }
+    100% { background-position: -200px 0; }
+}
+.blue-scrolling-bg {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 240px;
+    transform: translateY(-50%);
+    background-color: #0047FF;
+    /* Create subtle darker blue stripes to make the scrolling visible */
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 40px,
+        rgba(0, 0, 0, 0.1) 40px,
+        rgba(0, 0, 0, 0.1) 80px
+    );
+    background-size: 200px 200px;
+    animation: scrollBg 3s linear infinite;
+    z-index: -1;
+    box-shadow: 0 0 40px rgba(0, 71, 255, 0.3);
+}
+
+/* Text Styling */
+.about-text {
+    font-size: 4vw;
+    font-weight: 200;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    animation: fadeIn 2s ease-out;
+}
+@media (max-width: 600px) {
+    .about-text {
+        font-size: 24px;
+    }
+}
+body.light .about-text {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+/* Twitter Button */
+.center-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+.twitter-btn-custom {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0a0b10;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.2em;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.twitter-btn-custom svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+.twitter-btn-custom:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #fff;
+    color: #0a0b10;
+    border-color: #fff;
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+{{ end }}

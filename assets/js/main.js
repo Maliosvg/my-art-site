@@ -116,24 +116,38 @@ function toggleHeaderShadow(scrollY) {
 
 function setThemeByUserPref() {
     darkThemeCss = document.getElementById("dark-theme");
-    const savedTheme = localStorage.getItem(THEME_PREF_STORAGE_KEY) ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const savedTheme = localStorage.getItem(THEME_PREF_STORAGE_KEY) || 'dark'; // Force default dark
     const darkThemeToggles = document.querySelectorAll('.dark-theme-toggle');
     setTheme(savedTheme, darkThemeToggles);
     darkThemeToggles.forEach(el => el.addEventListener('click', toggleTheme, { capture: true }))
+    
+    // Listen for transition ready event
+    window.addEventListener('theme-change-ready', (e) => {
+        let newTheme = e.detail.theme;
+        let targets = document.querySelectorAll('.dark-theme-toggle');
+        setThemeAndStore(newTheme, targets);
+    });
 }
 
 function toggleTheme(event) {
     toggleIcon = event.currentTarget.querySelector("a svg.feather");
+    let targetTheme = 'light';
     if (toggleIcon.classList[1] === THEME_TO_ICON_CLASS.dark) {
-        setThemeAndStore('light', [event.currentTarget]);
+        targetTheme = 'light';
     } else if (toggleIcon.classList[1] === THEME_TO_ICON_CLASS.light) {
-        setThemeAndStore('dark', [event.currentTarget]);
+        targetTheme = 'dark';
     }
+    // Dispatch event to trigger animation in particles.js
+    window.dispatchEvent(new CustomEvent('request-theme-transition', { detail: { theme: targetTheme } }));
 }
 
 function setTheme(themeToSet, targets) {
     darkThemeCss.disabled = themeToSet === 'light';
+    if (themeToSet === 'light') {
+        document.body.classList.add('light');
+    } else {
+        document.body.classList.remove('light');
+    }
     targets.forEach((target) => {
         target.querySelector('a').innerHTML = feather.icons[THEME_TO_ICON_CLASS[themeToSet].split('-')[1]].toSvg();
         target.querySelector(".dark-theme-toggle-screen-reader-target").textContent = [THEME_TO_ICON_TEXT_CLASS[themeToSet]];

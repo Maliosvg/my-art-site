@@ -3,64 +3,296 @@
 <head>
     <meta charset="utf-8">
     <title>{{ .Site.Title }}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ .Site.Params.description }}">
     <style>
-        /* 1. 强行找回背景和网格 */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+
+        /* ===== Reset & Cross-page Smoothing ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+        html { cursor: none !important; }
+        
+        /* Swup Crossfade */
+        .transition-fade {
+            transition: 0.2s;
+            opacity: 1;
+        }
+        html.is-animating .transition-fade {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        html.is-leaving .transition-fade {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        
+        @view-transition { navigation: auto; }
+
         body {
-            background-color: #1a1a1a !important; /* 深灰色背景 */
-            background-image: radial-gradient(#333 1px, transparent 1px) !important;
-            background-size: 20px 20px !important;
-            color: #e0e0e0 !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            margin: 0;
+            background-color: #0a0b10;
+            color: #d8dbe2;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ===== Canvas ===== */
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 0 16px rgba(50,140,220,0.3), 0 0 40px rgba(50,140,220,0.08); }
+            50% { box-shadow: 0 0 24px rgba(50,140,220,0.5), 0 0 60px rgba(50,140,220,0.15); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes accentLine {
+            from { width: 0; opacity: 0; }
+            to { width: 36px; opacity: 1; }
+        }
+
+        /* ===== Layout ===== */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding-top: 50px;
+            padding: 100px 24px 60px;
         }
 
-        /* 2. 修复头像样式 */
-        .avatar img { 
-            width: 150px; 
-            height: 150px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 2px solid #333;
-            background-color: #222; /* 图片加载前的底色 */
+        body.light {
+            background-color: #ffffff;
+            color: #000000;
         }
 
-        .home-about { text-align: center; margin-bottom: 50px; }
-        h1 { font-weight: 300; letter-spacing: 0.2em; margin-top: 20px; text-transform: uppercase; }
-        h2 { font-weight: 200; opacity: 0.6; font-size: 1em; }
+        body.light .avatar img {
+            background-color: transparent;
+        }
 
-        /* 3. 作品列表 */
-        .home-posts { width: 90%; max-width: 600px; }
-        .post-item { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .post-item a { color: #3498db; text-decoration: none; }
-        .post-item time { color: #555; font-family: monospace; }
+        /* ===== Home About — acid minimal ===== */
+        .home-about {
+            text-align: center;
+            margin-bottom: 64px;
+            animation: fadeInUp 0.7s ease-out 0.3s both;
+        }
+
+        .avatar img {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(50,140,220,0.2);
+            background-color: #12141c;
+            animation: avatarGlow 3.5s ease-in-out infinite;
+            transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
+        }
+        .avatar img:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(50,140,220,0.55), 0 0 80px rgba(50,140,220,0.18);
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            margin-top: 28px;
+            text-transform: uppercase;
+            font-size: 1.6em;
+            background: linear-gradient(135deg, #d0d4dc 0%, #4a9eda 50%, #d0d4dc 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.7s ease-out 0.45s both, gradientShift 8s ease infinite;
+        }
+
+        /* Accent line under title */
+        .title-accent {
+            width: 36px; height: 1.5px;
+            background: linear-gradient(90deg, rgba(50,140,220,0.7), rgba(50,140,220,0.05));
+            margin: 14px auto 0;
+            animation: accentLine 0.8s ease-out 0.6s both;
+        }
+
+        .subtitle {
+            font-weight: 200;
+            opacity: 0.35;
+            font-size: 0.92em;
+            margin-top: 12px;
+            letter-spacing: 0.08em;
+            animation: fadeInUp 0.7s ease-out 0.55s both;
+        }
+
+        /* ===== Posts — clean card style ===== */
+        .home-posts {
+            width: 90%; max-width: 580px;
+            animation: fadeInUp 0.7s ease-out 0.65s both;
+        }
+
+        .section-title {
+            font-weight: 300;
+            font-size: 0.82em;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            padding-bottom: 12px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: rgba(255,255,255,0.3);
+        }
+        body.light .section-title {
+            color: rgba(0,0,0,0.8);
+            border-bottom: 1px solid rgba(0,0,0,0.15);
+        }
+
+        .post-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+            border: 1px solid transparent;
+        }
+        .post-item:hover {
+            background: rgba(50,140,220,0.04);
+            border-color: rgba(50,140,220,0.1);
+            transform: translateX(4px);
+        }
+        body.light .post-item:hover {
+            background: rgba(50,140,220,0.06);
+            border-color: rgba(50,140,220,0.15);
+        }
+
+        .post-item a {
+            color: rgba(180,200,230,0.85);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.93em;
+            transition: color 0.2s ease;
+            letter-spacing: 0.01em;
+        }
+        body.light .post-item a {
+            color: rgba(20, 30, 40, 0.95);
+        }
+        .post-item:hover a { color: #4a9eda; }
+
+        .post-item time {
+            color: rgba(255,255,255,0.15);
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.78em;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        body.light .post-item time {
+            color: rgba(0,0,0,0.6);
+        }
+
+        /* ===== Footer ===== */
+        .home-footer {
+            margin-top: auto;
+            padding-top: 80px;
+            text-align: center;
+            font-size: 0.72em;
+            opacity: 0.2;
+            letter-spacing: 0.1em;
+            animation: fadeInUp 0.7s ease-out 0.8s both;
+        }
+
+        /* ===== Dashed Line ===== */
+        .dashed-line {
+            flex-grow: 1; border-bottom: 1px dashed rgba(255, 255, 255, 0.15); margin: 0 16px; min-width: 20px; position: relative; top: 5px;
+        }
+        body.light .dashed-line { border-bottom: 1px dashed rgba(0, 0, 0, 0.15); }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 600px) {
+            .page-wrapper { padding-top: 60px; }
+            .avatar img { width: 80px; height: 80px; }
+            h1 { font-size: 1.3em; letter-spacing: 0.15em; }
+            .post-item { padding: 11px 12px; }
+            .post-item a { font-size: 0.88em; }
+        }
     </style>
+    <script src="https://unpkg.com/swup@4"></script>
+    <script src="https://unpkg.com/@swup/head-plugin@2"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (!window.swup && document.querySelector('#swup-container')) {
+                window.swup = new Swup({
+                    containers: ["#swup-container"],
+                    plugins: [new SwupHeadPlugin({ awaitAssets: true })]
+                });
+                window.swup.hooks.on('page:view', () => {
+                    const savedTheme = localStorage.getItem('theme-preference');
+                    const darkCss = document.getElementById("dark-theme");
+                    if (savedTheme === 'light' && darkCss) {
+                        darkCss.disabled = true;
+                        document.body.classList.add('light');
+                    } else if (darkCss) {
+                        darkCss.disabled = false;
+                        document.body.classList.remove('light');
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body>
 
-<section class="home-about">
-    <div class="avatar">
-        {{/* 这里的路径一定要带上 / */}}
-        <img src="/images/avatar.jpg" alt="avatar" onerror="this.src='https://ui-avatars.com/api/?name=B&background=3498db&color=fff';">
-    </div>
-    <h1>{{ .Site.Title }}</h1>
-    <h2>{{ .Site.Params.description }}</h2>
-</section>
+<canvas id="particle-canvas"></canvas>
 
-<div class="home-posts">
-    <h2 style="font-weight: 300; font-size: 1.2em; border-bottom: 1px solid #333; padding-bottom: 10px;">最近作品</h2>
-    {{ range (where .Site.RegularPages "Section" "posts") }}
-    <div class="post-item">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <time>{{ .Date.Format "2006-01-02" }}</time>
+{{ partial "sidebar.html" . }}
+
+<div id="swup-container" class="transition-fade">
+<div class="page-wrapper">
+    <section class="home-about">
+        <div class="avatar">
+            <img src="/images/avatar.jpg" alt="avatar" onerror="this.src='https://ui-avatars.com/api/?name=B&background=3498db&color=fff';">
+        </div>
+        <h1>{{ .Site.Title }}</h1>
+        <div class="title-accent"></div>
+        <h2 class="subtitle">{{ .Site.Params.description }}</h2>
+    </section>
+
+    <div class="home-posts">
+        <h2 class="section-title">最近作品</h2>
+        {{ range first 10 (where .Site.RegularPages "Section" "posts") }}
+        <div class="post-item">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <div class="dashed-line"></div>
+            <time>{{ .Date.Format "2006-01-02" }}</time>
+        </div>
+        {{ end }}
     </div>
-    {{ end }}
+
+    <footer class="home-footer">
+        <span>bluesquare © {{ now.Format "2006" }}</span>
+    </footer>
 </div>
+</div>
+
+{{- partial "theme-toggle.html" . -}}
+{{- partial "cursor.html" . -}}
+
+{{ $particlesJs := resources.Get "js/particles.js" }}
+<script src="{{ $particlesJs.RelPermalink }}"></script>
+
 
 </body>
 </html>

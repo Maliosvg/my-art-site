@@ -12,6 +12,39 @@ theme = 'gokarna'
   showThemeSwitcher = true
   showPostsOnHomePage = "recent"
   numberPostsOnHomePage = 5
+  
+  CustomHeadHTML = """
+  <script src="https://unpkg.com/swup@4"></script>
+  <script src="https://unpkg.com/@swup/head-plugin@2"></script>
+  <style>
+    .transition-fade { transition: 0.2s; opacity: 1; }
+    html.is-animating .transition-fade { opacity: 0; transform: translateY(10px); }
+    html.is-leaving .transition-fade { opacity: 0; transform: translateY(-10px); }
+    @view-transition { navigation: auto; }
+    html, body, * { cursor: none !important; }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!window.swup && document.querySelector('#swup-container')) {
+            window.swup = new Swup({
+                containers: ["#swup-container"],
+                plugins: [new SwupHeadPlugin({ awaitAssets: true })]
+            });
+            window.swup.hooks.on('page:view', () => {
+                const savedTheme = localStorage.getItem('theme-preference');
+                const darkCss = document.getElementById("dark-theme");
+                if (savedTheme === 'light' && darkCss) {
+                    darkCss.disabled = true;
+                    document.body.classList.add('light');
+                } else if (darkCss) {
+                    darkCss.disabled = false;
+                    document.body.classList.remove('light');
+                }
+            });
+        }
+    });
+  </script>
+  """
 
   [[params.socialIcons]]
     name = "X"

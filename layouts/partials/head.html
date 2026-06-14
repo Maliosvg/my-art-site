@@ -38,6 +38,8 @@
     <!-- SEO canonicals: helps Google understand your site better when using marketing campaign tagging etc -->
     <link rel="canonical" href="{{ .Permalink }}">
 
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
     {{ $cssNormalize := resources.Get "css/normalize.min.css" }}
     <link rel="stylesheet" type="text/css" href="{{ $cssNormalize.RelPermalink }}" media="print">
 
@@ -58,4 +60,7 @@
     {{ if .Site.Params.CustomHeadHTML }}
     {{ .Site.Params.CustomHeadHTML | safeHTML }}
     {{ end }}
+
+    {{ $particlesJs := resources.Get "js/particles.js" | minify | resources.Fingerprint "sha256" }}
+    <script defer src="{{ $particlesJs.RelPermalink }}" integrity="{{ $particlesJs.Data.Integrity }}"></script>
 </head>

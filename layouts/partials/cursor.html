@@ -1,0 +1,113 @@
+<div class="custom-cursor-dot"></div>
+<div class="custom-cursor-ring"></div>
+
+<style>
+/* Custom Cursor & Smooth Transitions */
+@view-transition { navigation: auto; }
+
+html, body, * {
+    cursor: none !important;
+}
+
+.custom-cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 6px; height: 6px;
+    background: #4a9eda;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    will-change: transform, width, height, background;
+    transition: width 0.2s, height 0.2s, background 0.2s;
+}
+
+.custom-cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 30px; height: 30px;
+    border: 1px solid rgba(74, 158, 218, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    will-change: transform, width, height, border-color;
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
+    transition-timing-function: ease-out;
+}
+
+body.light .custom-cursor-dot {
+    background: #000;
+}
+body.light .custom-cursor-ring {
+    border-color: rgba(0,0,0,0.3);
+}
+
+.custom-cursor-dot.hovered {
+    width: 12px; height: 12px;
+    background: rgba(74, 158, 218, 0.8);
+}
+body.light .custom-cursor-dot.hovered {
+    background: rgba(0,0,0,0.8);
+}
+.custom-cursor-ring.hovered {
+    width: 50px; height: 50px;
+    border-color: rgba(74, 158, 218, 0.2);
+}
+body.light .custom-cursor-ring.hovered {
+    border-color: rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .custom-cursor-dot, .custom-cursor-ring {
+        display: none !important;
+    }
+}
+</style>
+
+<script>
+    const cursorDot = document.querySelector(".custom-cursor-dot");
+    const cursorRing = document.querySelector(".custom-cursor-ring");
+    
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    
+    window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }, { passive: true });
+    
+    const loop = () => {
+        dotX = mouseX;
+        dotY = mouseY;
+        ringX += (mouseX - ringX) * 0.2;
+        ringY += (mouseY - ringY) * 0.2;
+        
+        cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+        cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+    
+    const observer = new MutationObserver(() => {
+        const newEls = document.querySelectorAll("a, button, input, select");
+        newEls.forEach((el) => {
+            if(!el.hasAttribute("data-cursor-bound")) {
+                el.setAttribute("data-cursor-bound", "true");
+                el.addEventListener("mouseenter", () => {
+                    cursorDot.classList.add("hovered");
+                    cursorRing.classList.add("hovered");
+                }, { passive: true });
+                el.addEventListener("mouseleave", () => {
+                    cursorDot.classList.remove("hovered");
+                    cursorRing.classList.remove("hovered");
+                }, { passive: true });
+            }
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+</script>

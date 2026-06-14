@@ -1,0 +1,115 @@
+<button id="global-theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+    <div class="icon-sun">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </div>
+    <div class="icon-moon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </div>
+</button>
+
+<style>
+/* Global Theme Toggle Button */
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 32px;
+    border-radius: 6px;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: none;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+}
+
+.theme-btn svg {
+    width: 16px;
+    height: 16px;
+    transition: all 0.3s ease;
+}
+
+.icon-sun { display: block; }
+.icon-moon { display: none; }
+
+/* Dark Mode (Default) Hover */
+.theme-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* Light Mode Styles */
+body.light .theme-btn {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #000;
+}
+body.light .icon-sun { display: none; }
+body.light .icon-moon { display: block; }
+
+/* Light Mode Hover */
+body.light .theme-btn:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+</style>
+
+<script>
+    (function() {
+        const THEME_PREF_KEY = "theme-preference";
+        const btn = document.getElementById('global-theme-toggle');
+        const canvas = document.getElementById('particle-canvas');
+        
+        // Initial load
+        const savedTheme = localStorage.getItem(THEME_PREF_KEY) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light');
+            let darkThemeCss = document.getElementById("dark-theme");
+            if (darkThemeCss) darkThemeCss.disabled = true;
+        }
+
+        if (btn) {
+            btn.addEventListener('click', () => {
+                let isLight = document.body.classList.contains('light');
+                let newTheme = isLight ? 'dark' : 'light';
+                
+                if (canvas) {
+                    window.dispatchEvent(new CustomEvent('request-theme-transition', { detail: { theme: newTheme } }));
+                } else {
+                    if (newTheme === 'light') {
+                        document.body.classList.add('light');
+                        localStorage.setItem(THEME_PREF_KEY, 'light');
+                        let darkThemeCss = document.getElementById("dark-theme");
+                        if (darkThemeCss) darkThemeCss.disabled = true;
+                    } else {
+                        document.body.classList.remove('light');
+                        localStorage.setItem(THEME_PREF_KEY, 'dark');
+                        let darkThemeCss = document.getElementById("dark-theme");
+                        if (darkThemeCss) darkThemeCss.disabled = false;
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('theme-change-ready', (e) => {
+            let newTheme = e.detail.theme;
+            localStorage.setItem(THEME_PREF_KEY, newTheme);
+            if (newTheme === 'light') {
+                document.body.classList.add('light');
+                let darkThemeCss = document.getElementById("dark-theme");
+                if (darkThemeCss) darkThemeCss.disabled = true;
+            } else {
+                document.body.classList.remove('light');
+                let darkThemeCss = document.getElementById("dark-theme");
+                if (darkThemeCss) darkThemeCss.disabled = false;
+            }
+        });
+    })();
+</script>

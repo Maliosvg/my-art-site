@@ -1,6 +1,6 @@
 ---
 title: "艾尔卡侬交响曲"
-date: 梦时间819分
+date: 2025-08-19
 type: "post"
 url: "/posts/3/"
 draft: false
@@ -9,5 +9,4 @@ draft: false
 
 
 
-![seek]
 <p align="center" style="color: gray; font-size: 0.8em;">《巴蜀山》 2026</p>

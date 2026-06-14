@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+            --font-size: 1.1rem;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>1mianyin1</title>
+    <meta name="description" content="我们都还年轻对吧，路还很长对吧
+">
+    <meta name="keywords" content=''>
+
+    <meta property="og:url" content="http://localhost:1313/posts/2/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="1mianyin1">
+    <meta property="og:description" content="我们都还年轻对吧，路还很长对吧
+">
+    <meta property="og:image" content="http://localhost:1313/images/avatar.jpg">
+    <meta property="og:image:secure_url" content="http://localhost:1313/images/avatar.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="1mianyin1">
+    <meta name="twitter:description" content="我们都还年轻对吧，路还很长对吧
+">
+    <meta property="twitter:domain" content="http://localhost:1313/posts/2/">
+    <meta property="twitter:url" content="http://localhost:1313/posts/2/">
+    <meta name="twitter:image" content="http://localhost:1313/images/avatar.jpg">
+
+    
+    <link rel="canonical" href="http://localhost:1313/posts/2/">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.min.css" media="print">
+
+    
+    <link rel="stylesheet" type="text/css" href="/css/main.min.css">
+
+    
+    <link id="dark-theme" rel="stylesheet" href="/css/dark.min.css">
+
+    
+    <script src="/js/bundle.min.90250e675792ce1559cb644d415124c2a5ff392831951ca6467c0610ae7d18e8.js" integrity="sha256-kCUOZ1eSzhVZy2RNQVEkwqX/OSgxlRymRnwGEK59GOg="></script>
+
+    
+
+    
+    
+      <script src="https://unpkg.com/swup@4"></script>
+  <script src="https://unpkg.com/@swup/head-plugin@2"></script>
+  <style>
+    .transition-fade { transition: 0.2s; opacity: 1; }
+    html.is-animating .transition-fade { opacity: 0; transform: translateY(10px); }
+    html.is-leaving .transition-fade { opacity: 0; transform: translateY(-10px); }
+    @view-transition { navigation: auto; }
+    html, body, * { cursor: none !important; }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!window.swup && document.querySelector('#swup-container')) {
+            window.swup = new Swup({
+                containers: ["#swup-container"],
+                plugins: [new SwupHeadPlugin({ awaitAssets: true })]
+            });
+            window.swup.hooks.on('page:view', () => {
+                const savedTheme = localStorage.getItem('theme-preference');
+                const darkCss = document.getElementById("dark-theme");
+                if (savedTheme === 'light' && darkCss) {
+                    darkCss.disabled = true;
+                    document.body.classList.add('light');
+                } else if (darkCss) {
+                    darkCss.disabled = false;
+                    document.body.classList.remove('light');
+                }
+            });
+        }
+    });
+  </script>
+  
+    
+
+    
+    <script defer src="/js/particles.min.8d7c579ebb8bb80376e7508528c8ed283c00992d604109c2ad1b1faf6752000d.js" integrity="sha256-jXxXnruLuAN251CFKMjtKDwAmS1gQQnCrRsfr2dSAA0="></script>
+</head>
+<body>
+        <canvas id="particle-canvas"></canvas>
+        <script>
+            
+            setThemeByUserPref();
+        </script><button id="global-theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+    <div class="icon-sun">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </div>
+    <div class="icon-moon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </div>
+</button>
+
+<style>
+ 
+.theme-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 32px;
+    border-radius: 6px;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    cursor: none;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+}
+
+.theme-btn svg {
+    width: 16px;
+    height: 16px;
+    transition: all 0.3s ease;
+}
+
+.icon-sun { display: block; }
+.icon-moon { display: none; }
+
+ 
+.theme-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+ 
+body.light .theme-btn {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: #000;
+}
+body.light .icon-sun { display: none; }
+body.light .icon-moon { display: block; }
+
+ 
+body.light .theme-btn:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+</style>
+
+<script>
+    (function() {
+        const THEME_PREF_KEY = "theme-preference";
+        const btn = document.getElementById('global-theme-toggle');
+        const canvas = document.getElementById('particle-canvas');
+        
+        
+        const savedTheme = localStorage.getItem(THEME_PREF_KEY) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light');
+            let darkThemeCss = document.getElementById("dark-theme");
+            if (darkThemeCss) darkThemeCss.disabled = true;
+        }
+
+        if (btn) {
+            btn.addEventListener('click', () => {
+                let isLight = document.body.classList.contains('light');
+                let newTheme = isLight ? 'dark' : 'light';
+                
+                if (canvas) {
+                    window.dispatchEvent(new CustomEvent('request-theme-transition', { detail: { theme: newTheme } }));
+                } else {
+                    if (newTheme === 'light') {
+                        document.body.classList.add('light');
+                        localStorage.setItem(THEME_PREF_KEY, 'light');
+                        let darkThemeCss = document.getElementById("dark-theme");
+                        if (darkThemeCss) darkThemeCss.disabled = true;
+                    } else {
+                        document.body.classList.remove('light');
+                        localStorage.setItem(THEME_PREF_KEY, 'dark');
+                        let darkThemeCss = document.getElementById("dark-theme");
+                        if (darkThemeCss) darkThemeCss.disabled = false;
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('theme-change-ready', (e) => {
+            let newTheme = e.detail.theme;
+            localStorage.setItem(THEME_PREF_KEY, newTheme);
+            if (newTheme === 'light') {
+                document.body.classList.add('light');
+                let darkThemeCss = document.getElementById("dark-theme");
+                if (darkThemeCss) darkThemeCss.disabled = true;
+            } else {
+                document.body.classList.remove('light');
+                let darkThemeCss = document.getElementById("dark-theme");
+                if (darkThemeCss) darkThemeCss.disabled = false;
+            }
+        });
+    })();
+</script>
+<div class="custom-cursor-dot"></div>
+<div class="custom-cursor-ring"></div>
+
+<style>
+ 
+@view-transition { navigation: auto; }
+
+html, body, * {
+    cursor: none !important;
+}
+
+.custom-cursor-dot {
+    position: fixed;
+    top: 0; left: 0;
+    width: 6px; height: 6px;
+    background: #4a9eda;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    will-change: transform, width, height, background;
+    transition: width 0.2s, height 0.2s, background 0.2s;
+}
+
+.custom-cursor-ring {
+    position: fixed;
+    top: 0; left: 0;
+    width: 30px; height: 30px;
+    border: 1px solid rgba(74, 158, 218, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    will-change: transform, width, height, border-color;
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
+    transition-timing-function: ease-out;
+}
+
+body.light .custom-cursor-dot {
+    background: #000;
+}
+body.light .custom-cursor-ring {
+    border-color: rgba(0,0,0,0.3);
+}
+
+.custom-cursor-dot.hovered {
+    width: 12px; height: 12px;
+    background: rgba(74, 158, 218, 0.8);
+}
+body.light .custom-cursor-dot.hovered {
+    background: rgba(0,0,0,0.8);
+}
+.custom-cursor-ring.hovered {
+    width: 50px; height: 50px;
+    border-color: rgba(74, 158, 218, 0.2);
+}
+body.light .custom-cursor-ring.hovered {
+    border-color: rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .custom-cursor-dot, .custom-cursor-ring {
+        display: none !important;
+    }
+}
+</style>
+
+<script>
+    const cursorDot = document.querySelector(".custom-cursor-dot");
+    const cursorRing = document.querySelector(".custom-cursor-ring");
+    
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    let ringX = mouseX;
+    let ringY = mouseY;
+    
+    window.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }, { passive: true });
+    
+    const loop = () => {
+        dotX = mouseX;
+        dotY = mouseY;
+        ringX += (mouseX - ringX) * 0.2;
+        ringY += (mouseY - ringY) * 0.2;
+        
+        cursorDot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+        cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+    
+    const observer = new MutationObserver(() => {
+        const newEls = document.querySelectorAll("a, button, input, select");
+        newEls.forEach((el) => {
+            if(!el.hasAttribute("data-cursor-bound")) {
+                el.setAttribute("data-cursor-bound", "true");
+                el.addEventListener("mouseenter", () => {
+                    cursorDot.classList.add("hovered");
+                    cursorRing.classList.add("hovered");
+                }, { passive: true });
+                el.addEventListener("mouseleave", () => {
+                    cursorDot.classList.remove("hovered");
+                    cursorRing.classList.remove("hovered");
+                }, { passive: true });
+            }
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+</script>
+<nav class="right-sidebar">
+    <ul class="sidebar-menu">
+        <li>
+            <a href="/">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+                <span class="nav-text">首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="/archives/">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
+                <span class="nav-text">全部</span>
+            </a>
+        </li>
+        <li>
+            <a href="/about/">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-7 8-7s8 3 8 7"/></svg>
+                <span class="nav-text">关于我</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+ 
+.right-sidebar {
+    position: fixed;
+    top: 50%;
+    left: 40px;
+    transform: translateY(-50%);
+    z-index: 100;
+}
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    padding: 11px;
+    border-radius: 30px;  
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    width: 44px;  
+    height: 44px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    white-space: nowrap;
+}
+body.light .sidebar-menu li a {
+    color: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.05);
+}
+.sidebar-menu li a svg {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+}
+.sidebar-menu li a .nav-text {
+    opacity: 0;
+    margin-left: 12px;
+    transform: translateX(-10px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+ 
+.sidebar-menu:hover li a {
+    width: 110px;  
+    background: rgba(255, 255, 255, 0.08);
+}
+body.light .sidebar-menu:hover li a {
+    background: rgba(0, 0, 0, 0.05);
+}
+.sidebar-menu:hover li a .nav-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+.sidebar-menu li a:hover {
+    color: #4a9eda;
+    border-color: rgba(50, 140, 220, 0.3);
+    background: rgba(50, 140, 220, 0.1);
+}
+body.light .sidebar-menu li a:hover {
+    color: #4a9eda;
+}
+
+@media (max-width: 820px) {
+    .right-sidebar {
+        top: auto;
+        bottom: 20px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        background: transparent;
+        padding: 0;
+        border: none;
+    }
+    .sidebar-menu {
+        flex-direction: row;
+        gap: 15px;
+    }
+    .sidebar-menu li a {
+         
+        width: 44px;
+    }
+    .sidebar-menu:hover li a {
+        width: 44px;  
+    }
+    .sidebar-menu:hover li a .nav-text {
+        opacity: 0;  
+    }
+}
+</style>
+<div id="swup-container" class="transition-fade">
+            <main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>1mianyin1</h1>
+
+        
+
+        
+	
+	
+	
+	
+        
+
+	
+
+	
+
+	
+          <small role="doc-subtitle"></small>
+	
+
+	
+          <p class="post-date">
+              
+
+              March 12, 2026
+
+              
+          </p>
+	
+
+        <ul class="post-tags">
+          
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>我们都还年轻对吧，路还很长对吧</p>
+<!-- raw HTML omitted -->
+
+        
+    </div>
+
+    <div class="prev-next">
+        
+    </div>
+
+    
+    
+    
+</div>
+
+
+
+    
+
+            </main>
+        </div><footer class="footer">
+    
+    
+
+    
+
+    
+
+    
+</footer>
+</body>
+</html>

@@ -9,5 +9,4 @@ draft: false
 
 
 
-![seek]
 <p align="center" style="color: gray; font-size: 0.8em;">《椎名》 2026</p>
