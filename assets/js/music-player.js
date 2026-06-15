@@ -49,7 +49,8 @@
     }
     
     // Playlist DOM
-    const btnList = document.getElementById('ap-playlist-toggle-btn');
+    const btnLyrics = document.getElementById('ap-lyrics-btn');
+    const btnPlaylist = document.getElementById('ap-playlist-btn');
     const playlistBox = document.getElementById('ap-playlist-box');
     const playlistList = document.getElementById('ap-playlist-list');
     let showingList = false;
@@ -288,17 +289,20 @@
         });
     }
 
-    function togglePlaylist() {
-        showingList = !showingList;
-        if (showingList) {
-            lyricsBox.style.display = 'none';
-            playlistBox.style.display = 'block';
-            btnList.style.color = 'var(--theme-blue)';
-        } else {
-            lyricsBox.style.display = 'block';
-            playlistBox.style.display = 'none';
-            btnList.style.color = '';
-        }
+    function showLyrics() {
+        showingList = false;
+        lyricsBox.style.display = 'block';
+        playlistBox.style.display = 'none';
+        if (btnLyrics) btnLyrics.style.color = 'var(--theme-blue)';
+        if (btnPlaylist) btnPlaylist.style.color = '';
+    }
+
+    function showPlaylist() {
+        showingList = true;
+        lyricsBox.style.display = 'none';
+        playlistBox.style.display = 'block';
+        if (btnPlaylist) btnPlaylist.style.color = 'var(--theme-blue)';
+        if (btnLyrics) btnLyrics.style.color = '';
     }
 
     // --- Play Controls ---
@@ -415,9 +419,11 @@
         audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
     });
     btnMode.addEventListener('click', toggleMode);
-    if (btnList) btnList.addEventListener('click', togglePlaylist);
+    if (btnLyrics) btnLyrics.addEventListener('click', showLyrics);
+    if (btnPlaylist) btnPlaylist.addEventListener('click', showPlaylist);
 
     // Init
     initSidebarState();
+    if (btnLyrics) btnLyrics.style.color = 'var(--theme-blue)';
     loadSong(currentIndex);
 })();
