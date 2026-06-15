@@ -296,7 +296,7 @@ body.light .player-progress-wrap { background: rgba(0,0,0,0.1); }
 }
 
 /* Lyrics Box */
-.player-lyrics-box {
+.player-lyrics {
     height: 70px;
     overflow: hidden;
     position: relative;
@@ -304,8 +304,8 @@ body.light .player-progress-wrap { background: rgba(0,0,0,0.1); }
     mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
     scrollbar-width: none;
 }
-.player-lyrics-box::-webkit-scrollbar { display: none; }
-.player-lyrics-list {
+.player-lyrics::-webkit-scrollbar { display: none; }
+.lyrics-list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -333,14 +333,14 @@ body.light .lyric-line { color: var(--sidebar-text-muted-light); }
 .lyric-line:hover { color: var(--theme-blue); }
 
 /* Playlist Box */
-.player-playlist-box {
+.player-playlist {
     height: 70px;
     overflow-y: auto;
     overflow-x: hidden;
 }
-.player-playlist-box::-webkit-scrollbar { width: 4px; }
-.player-playlist-box::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.5); border-radius: 2px; }
-.player-playlist-list {
+.player-playlist::-webkit-scrollbar { width: 4px; }
+.player-playlist::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.5); border-radius: 2px; }
+.playlist-list {
     list-style: none;
     padding: 0;
     margin: 0;
