@@ -2,30 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:64315/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/</loc>
     <lastmod>2026-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64315/posts/4/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/posts/4/</loc>
     <lastmod>2026-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64315/posts/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/posts/</loc>
     <lastmod>2026-04-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64315/posts/2/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/posts/2/</loc>
     <lastmod>2026-03-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64315/posts/1/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/posts/1/</loc>
     <lastmod>2026-03-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64315/posts/3/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/posts/3/</loc>
     <lastmod>2025-08-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:64315/categories/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/categories/</loc>
   </url><url>
-    <loc>http://localhost:64315/tags/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/tags/</loc>
   </url><url>
-    <loc>http://localhost:64315/archives/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/archives/</loc>
   </url><url>
-    <loc>http://localhost:64315/about/</loc>
+    <loc>https://my-art-site-ashen.vercel.app/about/</loc>
   </url>
 </urlset>

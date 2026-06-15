@@ -3,7 +3,14 @@
  */
 (function () {
   var introCanvas = document.getElementById('intro-canvas');
-  if (!introCanvas) return;
+  if (!introCanvas || sessionStorage.getItem('introPlayed')) {
+      if (introCanvas) introCanvas.remove();
+      document.querySelectorAll('#swup-container, .app-sidebar, #global-theme-toggle').forEach(function(el) {
+          el.style.opacity = '1';
+      });
+      return;
+  }
+  sessionStorage.setItem('introPlayed', 'true');
 
   var ctx = introCanvas.getContext('2d');
   var W, H, dpr;
@@ -85,7 +92,7 @@
 
   // --- Butterfly System ---
   var butterflies = [];
-  var BUTTERFLY_COUNT = 80;
+  var BUTTERFLY_COUNT = window.innerWidth < 820 ? 30 : 80;
 
   function createButterfly() {
     // Mix of sizes: mostly 20-80, some giants
@@ -174,7 +181,7 @@
 
   // --- Dot Particles ---
   var dots = [];
-  var DOT_COUNT = 180;
+  var DOT_COUNT = window.innerWidth < 820 ? 60 : 180;
 
   function createDot() {
     var rand = Math.random();
@@ -249,7 +256,7 @@
   }
 
   function drawCode(timestamp, elapsed, pushOffset, c) {
-    var fontSize = Math.max(15, Math.min(19, W * 0.014));
+    var fontSize = W < 820 ? 11 : Math.max(15, Math.min(19, W * 0.014));
     var lineHeight = fontSize * 1.65;
     var startX = W * 0.52 + pushOffset;
     var startY = 60;
@@ -472,6 +479,9 @@
       // Show the main content UNDERNEATH before we cut the hole
       if (!introCanvas._contentRevealed) {
         introCanvas._contentRevealed = true;
+        var hideStyle = document.getElementById('intro-hide-style');
+        if (hideStyle) hideStyle.remove();
+        
         document.querySelectorAll('#swup-container, .app-sidebar, #global-theme-toggle').forEach(function(el) {
           // Keep CSS transitions intact, just change opacity
           el.style.opacity = '1';
