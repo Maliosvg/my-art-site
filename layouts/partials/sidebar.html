@@ -1,115 +1,3 @@
-<aside id="main-sidebar" class="app-sidebar collapsed">
-    <!-- Profile Area -->
-    <div class="sidebar-profile">
-        <div class="avatar-wrap">
-            <img src="{{ .Site.Params.AvatarURL | default "/images/avatar.jpg" }}" alt="Avatar" class="avatar-img">
-        </div>
-        <div class="profile-info">
-            <h2 class="profile-name">BLUESQUARE</h2>
-            <p class="profile-desc">求知若饥，虚心若愚</p>
-        </div>
-    </div>
-
-    <!-- Navigation Menu -->
-    <nav class="sidebar-nav">
-        <a href="/" class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            <span class="nav-text">首页</span>
-        </a>
-        <a href="/archives/" class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-            <span class="nav-text">全部</span>
-        </a>
-        <a href="/about/" class="nav-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span class="nav-text">关于我</span>
-        </a>
-    </nav>
-
-    <div class="sidebar-spacer"></div>
-
-    <!-- Music Player Widget -->
-    <div class="sidebar-player-widget">
-        <!-- Expanded UI -->
-        <div class="player-expanded-ui">
-            <div class="player-main">
-                <div class="player-cover-container" id="player-cover-btn">
-                    <img id="ap-cover" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="cover" class="spin-cover">
-                </div>
-                <div class="player-info">
-                    <div class="player-title" id="ap-title">Loading...</div>
-                    <div class="player-artist" id="ap-artist">API Request</div>
-                    <div class="player-progress-wrap" id="ap-progress-wrap">
-                        <div class="player-progress" id="ap-progress"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="player-controls">
-                <button class="player-btn small-btn" id="ap-mode-btn" title="播放模式">
-                    <!-- Default Loop All Icon -->
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mode-icon"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
-                </button>
-                <button class="player-btn small-btn" id="ap-prev-btn" title="上一首">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-                </button>
-                <button class="player-btn small-btn" id="ap-rewind-btn" title="快退 10秒">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 19 2 12 11 5 11 19"></polygon><polygon points="22 19 13 12 22 5 22 19"></polygon></svg>
-                </button>
-                <button class="player-btn big-btn" id="ap-play-btn" title="播放/暂停">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                </button>
-                <button class="player-btn small-btn" id="ap-forward-btn" title="快进 10秒">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 19 22 12 13 5 13 19"></polygon><polygon points="2 19 11 12 2 5 2 19"></polygon></svg>
-                </button>
-                <button class="player-btn small-btn" id="ap-next-btn" title="下一首">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-                </button>
-                <button class="player-btn small-btn" id="ap-list-btn" title="播放列表">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-                </button>
-            </div>
-
-            <!-- Lyrics Box -->
-            <div class="player-lyrics-box" id="ap-lyrics-box">
-                <ul class="player-lyrics-list" id="ap-lyrics-list">
-                    <li class="lyric-line active">歌词加载中...</li>
-                </ul>
-            </div>
-
-            <!-- Playlist Box -->
-            <div class="player-playlist-box" id="ap-playlist-box" style="display:none;">
-                <ul class="player-playlist-list" id="ap-playlist-list">
-                    <!-- populated by js -->
-                </ul>
-            </div>
-        </div>
-
-        <!-- Collapsed UI -->
-        <div class="player-collapsed-ui">
-            <div class="player-cover-container small">
-                <img id="ap-cover-small" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="cover" class="spin-cover">
-            </div>
-            <div class="player-progress-small-wrap" id="ap-progress-v-wrap">
-                <div class="player-progress-small" id="ap-progress-v"></div>
-            </div>
-            <button class="player-play-btn-small" id="ap-play-btn-small">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </button>
-        </div>
-    </div>
-
-    <!-- Toggle Button -->
-    <button class="sidebar-toggle-btn" id="sidebar-toggle" title="固定/取消固定侧边栏">
-        <svg class="icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="17" x2="12" y2="22"></line>
-            <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path>
-        </svg>
-    </button>
-</aside>
-
-<audio id="ap-audio" style="display:none;" preload="auto"></audio>
-
 <style>
 /* Sidebar CSS Variables */
 :root {
@@ -561,6 +449,119 @@ body.light .sidebar-toggle-btn {
     .app-sidebar { transform: translateX(-100%); }
 }
 </style>
+
+<aside id="main-sidebar" class="app-sidebar collapsed">
+    <!-- Profile Area -->
+    <div class="sidebar-profile">
+        <div class="avatar-wrap">
+            <img src="{{ .Site.Params.AvatarURL | default "/images/avatar.jpg" }}" alt="Avatar" class="avatar-img">
+        </div>
+        <div class="profile-info">
+            <h2 class="profile-name">BLUESQUARE</h2>
+            <p class="profile-desc">求知若饥，虚心若愚</p>
+        </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="sidebar-nav">
+        <a href="/" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="nav-text">首页</span>
+        </a>
+        <a href="/archives/" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <span class="nav-text">全部</span>
+        </a>
+        <a href="/about/" class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="nav-text">关于我</span>
+        </a>
+    </nav>
+
+    <div class="sidebar-spacer"></div>
+
+    <!-- Music Player Widget -->
+    <div class="sidebar-player-widget">
+        <!-- Expanded UI -->
+        <div class="player-expanded-ui">
+            <div class="player-main">
+                <div class="player-cover-container" id="player-cover-btn">
+                    <img id="ap-cover" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="cover" class="spin-cover">
+                </div>
+                <div class="player-info">
+                    <div class="player-title" id="ap-title">Loading...</div>
+                    <div class="player-artist" id="ap-artist">API Request</div>
+                    <div class="player-progress-wrap" id="ap-progress-wrap">
+                        <div class="player-progress" id="ap-progress"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn small-btn" id="ap-mode-btn" title="播放模式">
+                    <!-- Default Loop All Icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mode-icon"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                </button>
+                <button class="player-btn small-btn" id="ap-prev-btn" title="上一首">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                </button>
+                <button class="player-btn small-btn" id="ap-rewind-btn" title="快退 10秒">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 19 2 12 11 5 11 19"></polygon><polygon points="22 19 13 12 22 5 22 19"></polygon></svg>
+                </button>
+                <button class="player-btn big-btn" id="ap-play-btn" title="播放/暂停">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button class="player-btn small-btn" id="ap-forward-btn" title="快进 10秒">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 19 22 12 13 5 13 19"></polygon><polygon points="2 19 11 12 2 5 2 19"></polygon></svg>
+                </button>
+                <button class="player-btn small-btn" id="ap-next-btn" title="下一首">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+                </button>
+            </div>
+
+            <!-- Display Area: Lyrics / Playlist -->
+            <div class="player-display-area">
+                <!-- Lyrics Area -->
+                <div class="player-lyrics" id="ap-lyrics-box">
+                    <ul class="lyrics-list" id="ap-lyrics-list">
+                        <li class="lyric-line active">歌词加载中...</li>
+                    </ul>
+                </div>
+                <!-- Playlist Area -->
+                <div class="player-playlist hidden" id="ap-playlist-box">
+                    <!-- Playlist injected by JS -->
+                </div>
+            </div>
+            
+            <button class="playlist-toggle-btn" id="ap-playlist-toggle-btn" title="切换歌单/歌词">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <!-- Collapsed UI -->
+        <div class="player-collapsed-ui">
+            <div class="player-cover-container small">
+                <img id="ap-cover-small" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="cover" class="spin-cover">
+            </div>
+            <div class="player-progress-small-wrap" id="ap-progress-wrap-small">
+                <div class="player-progress-small" id="ap-progress-small"></div>
+            </div>
+            <button class="player-play-btn-small" id="ap-play-btn-small">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Toggle Button -->
+    <button class="sidebar-toggle-btn" id="sidebar-toggle" title="固定/取消固定侧边栏">
+        <svg class="icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="17" x2="12" y2="22"></line>
+            <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path>
+        </svg>
+    </button>
+</aside>
+
+<audio id="ap-audio" style="display:none;" preload="auto"></audio>
 
 {{ $musicJS := resources.Get "js/music-player.js" | resources.Minify }}
 <script src="{{ $musicJS.RelPermalink }}" defer></script>
