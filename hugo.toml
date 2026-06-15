@@ -18,8 +18,8 @@ theme = 'gokarna'
   <script src="https://unpkg.com/@swup/head-plugin@2"></script>
   <style>
     .transition-fade { transition: 0.2s; opacity: 1; }
-    html.is-animating .transition-fade { opacity: 0; transform: translateY(10px); }
-    html.is-leaving .transition-fade { opacity: 0; transform: translateY(-10px); }
+    html.is-animating .transition-fade { opacity: 0; }
+    html.is-leaving .transition-fade { opacity: 0; }
     @view-transition { navigation: auto; }
     html, body, * { cursor: none !important; }
   </style>
