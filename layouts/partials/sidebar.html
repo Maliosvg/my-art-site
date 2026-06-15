@@ -563,4 +563,4 @@ body.light .sidebar-toggle-btn {
 </style>
 
 {{ $musicJS := resources.Get "js/music-player.js" | resources.Minify }}
-<script src="{{ $musicJS.Permalink }}" defer></script>
+<script src="{{ $musicJS.RelPermalink }}" defer></script>
