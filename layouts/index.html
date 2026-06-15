@@ -240,6 +240,20 @@
                     containers: ["#swup-container"],
                     plugins: [new SwupHeadPlugin({ awaitAssets: true })]
                 });
+                // Prevent theme flash by saving and restoring immediately during replacement
+                window.swup.hooks.before('content:replace', () => {
+                    window._savedThemePref = localStorage.getItem('theme-preference');
+                });
+                window.swup.hooks.on('content:replace', () => {
+                    const savedTheme = window._savedThemePref || localStorage.getItem('theme-preference');
+                    if (savedTheme === 'light') {
+                        document.body.classList.add('light');
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    } else {
+                        document.body.classList.remove('light');
+                        document.documentElement.removeAttribute('data-theme');
+                    }
+                });
                 window.swup.hooks.on('page:view', () => {
                     const savedTheme = localStorage.getItem('theme-preference');
                     if (savedTheme === 'light') {

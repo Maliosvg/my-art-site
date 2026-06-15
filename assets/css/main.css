@@ -189,7 +189,8 @@ a:hover {
 }
 
 main#content {
-  margin: 90px auto 0;
+  padding-top: 90px;
+  margin: 0 auto;
   width: 100%;
   max-width: var(--content-width);
   box-sizing: border-box;
