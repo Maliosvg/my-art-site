@@ -437,6 +437,6 @@
 
     // Init
     initSidebarState();
-    if (btnLyrics) btnLyrics.style.color = 'var(--theme-blue)';
+    showLyrics();
     loadSong(currentIndex);
 })();

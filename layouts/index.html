@@ -12,7 +12,10 @@
         /* ===== Reset & Cross-page Smoothing ===== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
         html { cursor: none !important; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; }
-        ::-webkit-scrollbar { display: none; }
+        
+        /* 暴力隐藏全站所有滚动条 */
+        *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+        * { -ms-overflow-style: none !important; scrollbar-width: none !important; }
         
         /* Swup Crossfade */
         .transition-fade {
