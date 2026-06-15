@@ -9,6 +9,10 @@
   --light-tertiary-color: #272822;
   --light-text-color: black;
 }
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;

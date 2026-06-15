@@ -268,8 +268,8 @@
             
             // Scroll logic (center the active line)
             if (!isUserScrolling) {
-                // offset is index * line_height (20px)
-                const offset = activeIndex * 20; 
+                const activeLine = lines[activeIndex];
+                const offset = activeLine.offsetTop - (lyricsBox.clientHeight / 2) + (activeLine.clientHeight / 2);
                 lyricsBox.scrollTo({ top: offset, behavior: 'smooth' });
             }
         }
