@@ -3,7 +3,14 @@
  */
 (function () {
   var introCanvas = document.getElementById('intro-canvas');
-  if (!introCanvas) return;
+  if (!introCanvas || sessionStorage.getItem('introPlayed')) {
+      if (introCanvas) introCanvas.remove();
+      document.querySelectorAll('#swup-container, .app-sidebar, #global-theme-toggle').forEach(function(el) {
+          el.style.opacity = '1';
+      });
+      return;
+  }
+  sessionStorage.setItem('introPlayed', 'true');
 
   var ctx = introCanvas.getContext('2d');
   var W, H, dpr;

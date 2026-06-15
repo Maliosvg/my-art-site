@@ -320,9 +320,9 @@ body.light .player-progress-wrap { background: rgba(0,0,0,0.1); }
     min-height: 20px;
     line-height: 20px;
     transition: color 0.3s, font-size 0.3s, font-weight 0.3s;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-word;
+    margin-bottom: 8px;
 }
 body.light .lyric-line { color: var(--sidebar-text-muted-light); }
 .lyric-line.active {

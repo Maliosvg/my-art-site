@@ -32,13 +32,12 @@ theme = 'gokarna'
             });
             window.swup.hooks.on('page:view', () => {
                 const savedTheme = localStorage.getItem('theme-preference');
-                const darkCss = document.getElementById("dark-theme");
-                if (savedTheme === 'light' && darkCss) {
-                    darkCss.disabled = true;
+                if (savedTheme === 'light') {
                     document.body.classList.add('light');
-                } else if (darkCss) {
-                    darkCss.disabled = false;
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
                     document.body.classList.remove('light');
+                    document.documentElement.removeAttribute('data-theme');
                 }
             });
         }

@@ -71,8 +71,7 @@ body.light .theme-btn:hover {
         const savedTheme = localStorage.getItem(THEME_PREF_KEY) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         if (savedTheme === 'light') {
             document.body.classList.add('light');
-            let darkThemeCss = document.getElementById("dark-theme");
-            if (darkThemeCss) darkThemeCss.disabled = true;
+            document.documentElement.setAttribute('data-theme', 'light');
         }
 
         if (btn) {
@@ -85,14 +84,12 @@ body.light .theme-btn:hover {
                 } else {
                     if (newTheme === 'light') {
                         document.body.classList.add('light');
+                        document.documentElement.setAttribute('data-theme', 'light');
                         localStorage.setItem(THEME_PREF_KEY, 'light');
-                        let darkThemeCss = document.getElementById("dark-theme");
-                        if (darkThemeCss) darkThemeCss.disabled = true;
                     } else {
                         document.body.classList.remove('light');
+                        document.documentElement.removeAttribute('data-theme');
                         localStorage.setItem(THEME_PREF_KEY, 'dark');
-                        let darkThemeCss = document.getElementById("dark-theme");
-                        if (darkThemeCss) darkThemeCss.disabled = false;
                     }
                 }
             });
@@ -103,12 +100,10 @@ body.light .theme-btn:hover {
             localStorage.setItem(THEME_PREF_KEY, newTheme);
             if (newTheme === 'light') {
                 document.body.classList.add('light');
-                let darkThemeCss = document.getElementById("dark-theme");
-                if (darkThemeCss) darkThemeCss.disabled = true;
+                document.documentElement.setAttribute('data-theme', 'light');
             } else {
                 document.body.classList.remove('light');
-                let darkThemeCss = document.getElementById("dark-theme");
-                if (darkThemeCss) darkThemeCss.disabled = false;
+                document.documentElement.removeAttribute('data-theme');
             }
         });
     })();

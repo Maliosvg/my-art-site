@@ -49,7 +49,7 @@
     }
     
     // Playlist DOM
-    const btnList = document.getElementById('ap-list-btn');
+    const btnList = document.getElementById('ap-playlist-toggle-btn');
     const playlistBox = document.getElementById('ap-playlist-box');
     const playlistList = document.getElementById('ap-playlist-list');
     let showingList = false;
@@ -148,27 +148,26 @@
         lyricsBox.scrollTo(0, 0);
 
         try {
-            // Fetch Details
-            const detailRes = await fetch(`${API_BASE}/song/detail?ids=${id}`);
+            // Fetch everything in parallel
+            const [detailRes, urlRes, lrcRes] = await Promise.all([
+                fetch(`${API_BASE}/song/detail?ids=${id}`),
+                fetch(`${API_BASE}/song/url?id=${id}`),
+                fetch(`${API_BASE}/lyric?id=${id}`).catch(() => null)
+            ]);
+            
             const detailData = await detailRes.json();
-            
-            // Fetch Audio URL
-            const urlRes = await fetch(`${API_BASE}/song/url?id=${id}`);
             const urlData = await urlRes.json();
+            const lrcData = lrcRes ? await lrcRes.json() : null;
             
-            // Fetch Lyrics
-            fetch(`${API_BASE}/lyric?id=${id}`).then(r => r.json()).then(lrcData => {
-                if (lrcData.lrc && lrcData.lrc.lyric) {
-                    parseLyrics(lrcData.lrc.lyric);
-                } else {
-                    parsedLyrics = [{time: 0, text: '纯音乐，请欣赏'}];
-                    renderLyrics();
-                }
-            }).catch(() => {
-                parsedLyrics = [{time: 0, text: '暂无歌词'}];
+            // Handle Lyrics
+            if (lrcData && lrcData.lrc && lrcData.lrc.lyric) {
+                parseLyrics(lrcData.lrc.lyric);
+            } else {
+                parsedLyrics = [{time: 0, text: '纯音乐或暂无歌词'}];
                 renderLyrics();
-            });
+            }
 
+            // Handle Detail
             if (detailData.songs && detailData.songs.length > 0) {
                 const song = detailData.songs[0];
                 titleEl.textContent = song.name;
@@ -178,15 +177,16 @@
                 coverSmall.src = coverUrl;
             }
 
+            // Handle Audio URL
             if (urlData.data && urlData.data.length > 0 && urlData.data[0].url) {
                 audio.src = urlData.data[0].url;
                 if (isPlaying) {
                     audio.play();
                 }
+                preloadNextSong();
             } else {
                 titleEl.textContent = 'VIP/Copyright limit';
                 artistEl.textContent = 'Error';
-                // skip to next
                 setTimeout(() => nextSong(), 2000);
             }
 
@@ -195,6 +195,15 @@
             titleEl.textContent = 'Network Error';
         }
         renderPlaylist();
+    }
+    
+    function preloadNextSong() {
+        let nextIndex = playMode === 2 ? Math.floor(Math.random() * playlist.length) : (currentIndex + 1) % playlist.length;
+        const nextId = playlist[nextIndex].id;
+        // Quietly fetch the next song's data to cache it
+        fetch(`${API_BASE}/song/detail?ids=${nextId}`);
+        fetch(`${API_BASE}/song/url?id=${nextId}`);
+        fetch(`${API_BASE}/lyric?id=${nextId}`);
     }
 
     // --- Lyrics Parsing ---
@@ -370,6 +379,16 @@
         updateLyrics();
     });
 
+    function seekAudio(e) {
+        if (!audio.duration) return;
+        const rect = this.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = percent * audio.duration;
+    }
+    
+    if (progressWrap) progressWrap.addEventListener('click', seekAudio);
+    if (progressWrapSmall) progressWrapSmall.addEventListener('click', seekAudio);
+
     audio.addEventListener('ended', () => {
         if (playMode === 1) {
             // Loop One
@@ -396,20 +415,7 @@
         audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
     });
     btnMode.addEventListener('click', toggleMode);
-    btnList.addEventListener('click', togglePlaylist);
-
-    // Progress bar click
-    progressWrap.addEventListener('click', (e) => {
-        const rect = progressWrap.getBoundingClientRect();
-        const percent = (e.clientX - rect.left) / rect.width;
-        if (audio.duration) audio.currentTime = percent * audio.duration;
-    });
-
-    progressWrapV.addEventListener('click', (e) => {
-        const rect = progressWrapV.getBoundingClientRect();
-        const percent = (e.clientX - rect.left) / rect.width;
-        if (audio.duration) audio.currentTime = percent * audio.duration;
-    });
+    if (btnList) btnList.addEventListener('click', togglePlaylist);
 
     // Init
     initSidebarState();
