@@ -19,6 +19,13 @@ body {
     margin-bottom: 170px;
     position: relative;
     overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera globally */
+::-webkit-scrollbar {
+    display: none;
 }
 
 /* ===== Particle Canvas ===== */
@@ -152,6 +159,8 @@ html {
   position: relative;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body {
