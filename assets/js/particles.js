@@ -162,36 +162,39 @@
     if (!transitionActive) return;
     let elapsed = timestamp - transitionStartTime;
     
-    // Phase 1: Many hands close in from all directions (0 - 2000ms)
-    // Phase 2: Pause full cover, DOM updates (2000 - 2400ms)
-    // Phase 3: Wave sweep reveal (2400 - 4000ms)
+    // Phase 1: Many hands close in from all directions (0 - 1500ms)
+    // Phase 2: Pause full cover, DOM updates (1500 - 1800ms)
+    // Phase 3: Wave sweep reveal (1800 - 3200ms)
 
-    let p1 = Math.min(elapsed / 2000, 1);
+    let p1 = Math.min(elapsed / 1500, 1);
     p1 = p1 < 0.5 ? 4 * p1 * p1 * p1 : 1 - Math.pow(-2 * p1 + 2, 3) / 2; // smooth ease-in-out
 
-    let p3 = Math.max(0, Math.min((elapsed - 2400) / 1600, 1)); 
+    let p3 = Math.max(0, Math.min((elapsed - 1800) / 1400, 1)); 
 
     let handColor = transitionTargetMode === 'dark' ? '#0a0b10' : '#ffffff';
 
-    if (elapsed > 2200 && !transitionResolved) {
+    if (elapsed > 1650 && !transitionResolved) {
         window.dispatchEvent(new CustomEvent('theme-change-ready', { detail: { theme: transitionTargetMode } }));
         transitionResolved = true;
     }
 
-    if (elapsed < 2400) {
+    if (elapsed < 1800) {
         // ALWAYS target center
         let cx = width / 2;
         let cy = height / 2;
+        let size = Math.min(width, height) / 250; // slightly larger to ensure overlapverlap
         
-        let maxDist = Math.max(
+        let distToCorner = Math.max(
             Math.hypot(cx, cy),
             Math.hypot(width - cx, cy),
             Math.hypot(cx, height - cy),
             Math.hypot(width - cx, height - cy)
-        ) + 100;
+        );
+        
+        // Ensure hands spawn completely off-screen
+        let maxDist = distToCorner + (135 * size) + 50;
 
         let offset = maxDist * (1 - p1);
-        let size = Math.min(width, height) / 250; // slightly larger to ensure overlapverlap
 
         // To guarantee a perfect solid screen when hands overlap in the center
         if (p1 > 0.8) {
@@ -218,7 +221,7 @@
     }
 
     // Phase 3: Wave Reveal
-    if (elapsed >= 2400 && elapsed < 4000) {
+    if (elapsed >= 1800 && elapsed < 3200) {
         var waveX = p3 * (width + 600) - 300;
         
         ctx.save();
@@ -249,7 +252,7 @@
         ctx.restore();
     }
 
-    if (elapsed >= 4000) {
+    if (elapsed >= 3200) {
         transitionActive = false;
         canvas.style.zIndex = '0'; // Restore canvas z-index behind DOM
     }

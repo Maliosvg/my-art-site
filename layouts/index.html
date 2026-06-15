@@ -255,6 +255,7 @@
 </head>
 <body>
 
+<canvas id="intro-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;pointer-events:none;"></canvas>
 <canvas id="particle-canvas"></canvas>
 
 {{ partial "sidebar.html" . }}
@@ -292,6 +293,9 @@
 
 {{ $particlesJs := resources.Get "js/particles.js" }}
 <script src="{{ $particlesJs.RelPermalink }}"></script>
+
+{{ $introJs := resources.Get "js/intro.js" }}
+<script src="{{ $introJs.RelPermalink }}"></script>
 
 
 </body>

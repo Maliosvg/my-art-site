@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bluesquare</title>
-    <link>http://localhost:1313/</link>
+    <link>http://localhost:64315/</link>
     <description>Recent content on bluesquare</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 07 Apr 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:64315/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>BONS</title>
-      <link>http://localhost:1313/posts/4/</link>
+      <link>http://localhost:64315/posts/4/</link>
       <pubDate>Tue, 07 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/4/</guid>
+      <guid>http://localhost:64315/posts/4/</guid>
       <description>&lt;p&gt;名字什么的无所谓吧，叫着顺口就行。&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     <item>
       <title>1mianyin1</title>
-      <link>http://localhost:1313/posts/2/</link>
+      <link>http://localhost:64315/posts/2/</link>
       <pubDate>Thu, 12 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2/</guid>
+      <guid>http://localhost:64315/posts/2/</guid>
       <description>&lt;p&gt;我们都还年轻对吧，路还很长对吧&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     <item>
       <title>网站的诞生</title>
-      <link>http://localhost:1313/posts/1/</link>
+      <link>http://localhost:64315/posts/1/</link>
       <pubDate>Tue, 10 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/1/</guid>
+      <guid>http://localhost:64315/posts/1/</guid>
       <description>&lt;p&gt;我的许多内容也许会在这里更新吧&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     <item>
       <title>艾尔卡侬交响曲</title>
-      <link>http://localhost:1313/posts/3/</link>
+      <link>http://localhost:64315/posts/3/</link>
       <pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/3/</guid>
+      <guid>http://localhost:64315/posts/3/</guid>
       <description>&lt;p&gt;我现在很烦的说，我也只是个青少年，能怎么办呢。&lt;/p&gt;&#xA;&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     <item>
       <title>全部作品</title>
-      <link>http://localhost:1313/archives/</link>
+      <link>http://localhost:64315/archives/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/archives/</guid>
+      <guid>http://localhost:64315/archives/</guid>
       <description></description>
     </item>
     <item>
       <title>关于我</title>
-      <link>http://localhost:1313/about/</link>
+      <link>http://localhost:64315/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>http://localhost:64315/about/</guid>
       <description></description>
     </item>
   </channel>
