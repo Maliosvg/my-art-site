@@ -1,10 +1,11 @@
 (function() {
-    const playlist = [
+    const originalPlaylist = [
         { id: 1372721552, name: '又是一天', artist: 'Shanghai Qiutian' },
         { id: 1811964999, name: '我等你们在崇明海边', artist: 'Shanghai Qiutian' },
         { id: 1811964998, name: 'Always a Place', artist: 'Shanghai Qiutian' },
         { id: 2086033930, name: '妳是我見過紫砂最多次的女生', artist: 'snovv' }
     ];
+    let playlist = [...originalPlaylist];
     let currentIndex = 0;
     
     // Play Modes: 0: Loop All, 1: Loop One, 2: Random
@@ -199,7 +200,7 @@
     }
     
     function preloadNextSong() {
-        let nextIndex = playMode === 2 ? Math.floor(Math.random() * playlist.length) : (currentIndex + 1) % playlist.length;
+        let nextIndex = (currentIndex + 1) % playlist.length;
         const nextId = playlist[nextIndex].id;
         // Quietly fetch the next song's data to cache it
         fetch(`${API_BASE}/song/detail?ids=${nextId}`);
@@ -319,22 +320,13 @@
     }
 
     function nextSong() {
-        if (playMode === 2) {
-            // Random
-            currentIndex = Math.floor(Math.random() * playlist.length);
-        } else {
-            currentIndex++;
-        }
+        currentIndex++;
         loadSong(currentIndex);
         isPlaying = true;
     }
 
     function prevSong() {
-        if (playMode === 2) {
-            currentIndex = Math.floor(Math.random() * playlist.length);
-        } else {
-            currentIndex--;
-        }
+        currentIndex--;
         loadSong(currentIndex);
         isPlaying = true;
     }
@@ -355,8 +347,29 @@
         }
     }
 
+    function shuffleArray(array) {
+        let newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+    }
+
     function toggleMode() {
+        const currentSongId = playlist[currentIndex].id;
         playMode = (playMode + 1) % 3;
+        
+        if (playMode === 2) {
+            playlist = shuffleArray(originalPlaylist);
+        } else {
+            playlist = [...originalPlaylist];
+        }
+        
+        currentIndex = playlist.findIndex(s => s.id === currentSongId);
+        if (currentIndex === -1) currentIndex = 0;
+        renderPlaylist();
+        
         // Icons: 0: Loop All, 1: Loop One, 2: Random
         const modeIcons = [
             `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>`,
