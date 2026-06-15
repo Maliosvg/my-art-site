@@ -445,8 +445,92 @@ body.light .sidebar-toggle-btn {
     fill: rgba(74, 158, 218, 0.4);
 }
 
+/* Mobile Sidebar Overlay */
+.sidebar-mobile-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+.sidebar-mobile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hamburger Button */
+.mobile-hamburger-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--sidebar-bg-dark);
+    color: var(--theme-blue);
+    border: 1px solid var(--sidebar-border-dark);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 95;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, background 0.2s;
+}
+body.light .mobile-hamburger-btn {
+    background: var(--sidebar-bg-light);
+    border: 1px solid var(--sidebar-border-light);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.mobile-hamburger-btn:active { transform: scale(0.9); }
+.mobile-hamburger-btn svg { width: 24px; height: 24px; }
+
 @media (max-width: 820px) {
-    .app-sidebar { transform: translateX(-100%); }
+    /* Hide the normal toggle button on mobile */
+    .sidebar-toggle-btn { display: none !important; }
+    
+    /* Show Hamburger */
+    .mobile-hamburger-btn { display: flex; }
+
+    /* Override Sidebar styles for mobile */
+    .app-sidebar {
+        transform: translateX(-100%);
+        width: 280px !important; /* Force expand width on mobile so player is usable */
+        box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+    }
+    
+    /* When active */
+    .app-sidebar.mobile-open {
+        transform: translateX(0);
+    }
+    
+    /* Force profile and text to be visible on mobile since it's 280px wide */
+    .app-sidebar .profile-info,
+    .app-sidebar .nav-text {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+    
+    .app-sidebar .avatar-wrap {
+        width: 60px !important; 
+        height: 60px !important; 
+        margin-bottom: 15px !important;
+    }
+    
+    /* Force big player to show, hide small player */
+    .app-sidebar .player-expanded-ui {
+        display: block !important;
+        opacity: 1 !important;
+        animation: none !important;
+        bottom: 10px !important; /* move down since toggle btn is hidden */
+    }
+    .app-sidebar .player-collapsed-ui {
+        display: none !important;
+    }
 }
 </style>
 
@@ -560,6 +644,16 @@ body.light .sidebar-toggle-btn {
         </svg>
     </button>
 </aside>
+
+<!-- Mobile Overlays & Buttons -->
+<div class="sidebar-mobile-overlay" id="sidebar-mobile-overlay"></div>
+<button class="mobile-hamburger-btn" id="mobile-hamburger-btn" title="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+</button>
 
 <audio id="ap-audio" style="display:none;" preload="auto"></audio>
 

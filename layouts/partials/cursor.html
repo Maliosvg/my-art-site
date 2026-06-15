@@ -5,8 +5,10 @@
 /* Custom Cursor & Smooth Transitions */
 @view-transition { navigation: auto; }
 
-html, body, * {
-    cursor: none !important;
+@media (hover: hover) and (pointer: fine) {
+    html, body, * {
+        cursor: none !important;
+    }
 }
 
 .custom-cursor-dot {
@@ -43,6 +45,12 @@ body.light .custom-cursor-ring {
     border-color: rgba(0,0,0,0.3);
 }
 
+.custom-cursor-ring.active {
+    width: 35px; height: 35px;
+    background: rgba(74, 158, 218, 0.1);
+    border-color: rgba(74, 158, 218, 0.4);
+}
+
 .custom-cursor-dot.hovered {
     width: 12px; height: 12px;
     background: rgba(74, 158, 218, 0.8);
@@ -66,6 +74,7 @@ body.light .custom-cursor-ring.hovered {
 </style>
 
 <script>
+if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
     const cursorDot = document.querySelector(".custom-cursor-dot");
     const cursorRing = document.querySelector(".custom-cursor-ring");
     
@@ -110,4 +119,5 @@ body.light .custom-cursor-ring.hovered {
         });
     });
     observer.observe(document.body, { childList: true, subtree: true });
+}
 </script>

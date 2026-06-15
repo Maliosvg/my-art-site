@@ -256,6 +256,10 @@
 <body>
 
 <canvas id="intro-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;pointer-events:none;"></canvas>
+<script>
+    // Prevent UI flash before intro animation starts. This only runs on hard reload.
+    document.write('<style id="intro-hide-style">#swup-container, .app-sidebar, #global-theme-toggle { opacity: 0 !important; }</style>');
+</script>
 <canvas id="particle-canvas"></canvas>
 
 {{ partial "sidebar.html" . }}

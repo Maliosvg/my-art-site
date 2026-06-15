@@ -111,6 +111,26 @@
         }
     });
 
+    // --- Mobile Sidebar Logic ---
+    const mobileBtn = document.getElementById('mobile-hamburger-btn');
+    const mobileOverlay = document.getElementById('sidebar-mobile-overlay');
+
+    if (mobileBtn && mobileOverlay) {
+        mobileBtn.addEventListener('click', () => {
+            sidebar.classList.add('mobile-open');
+            mobileOverlay.classList.add('active');
+            mobileBtn.style.transform = 'scale(0)';
+            setTimeout(() => mobileBtn.style.display = 'none', 200);
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.remove('active');
+            mobileBtn.style.display = 'flex';
+            setTimeout(() => mobileBtn.style.transform = 'scale(1)', 10);
+        });
+    }
+
     // --- Audio API & Logic ---
     const API_BASE = 'https://netease-cloud-music-api-theta-three.vercel.app';
 
