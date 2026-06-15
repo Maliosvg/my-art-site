@@ -363,6 +363,34 @@ body.light .playlist-item { color: var(--sidebar-text-muted-light); }
     font-weight: bold;
 }
 
+/* Playlist Toggle Button */
+.playlist-toggle-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--sidebar-text-muted-dark);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, background 0.2s;
+    z-index: 10;
+}
+body.light .playlist-toggle-btn {
+    color: var(--sidebar-text-muted-light);
+}
+.playlist-toggle-btn:hover {
+    color: var(--theme-blue);
+    background: var(--sidebar-hover-dark);
+}
+body.light .playlist-toggle-btn:hover {
+    background: var(--sidebar-hover-light);
+}
+
 /* Collapsed Player */
 .player-collapsed-ui {
     position: absolute;

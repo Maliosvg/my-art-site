@@ -57,8 +57,8 @@
     // Player DOM - Collapsed
     const coverSmall = document.getElementById('ap-cover-small');
     const btnPlaySmall = document.getElementById('ap-play-btn-small');
-    const progressWrapV = document.getElementById('ap-progress-v-wrap');
-    const progressV = document.getElementById('ap-progress-v');
+    const progressWrapSmall = document.getElementById('ap-progress-wrap-small');
+    const progressSmall = document.getElementById('ap-progress-small');
     
     // Audio
     const audio = document.getElementById('ap-audio');
@@ -366,7 +366,7 @@
     audio.addEventListener('timeupdate', () => {
         const p = (audio.currentTime / audio.duration) * 100 || 0;
         progressBar.style.width = p + '%';
-        progressV.style.width = p + '%';
+        if (progressSmall) progressSmall.style.width = p + '%';
         updateLyrics();
     });
 

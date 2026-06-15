@@ -7,6 +7,8 @@
             --accent-color: {{ .Site.Params.AccentColor | default "#FF4D4D" }};
             --font-size: {{ .Site.Params.FontSize | default "1.1rem" }};
         }
+        html, body { background-color: #0a0b10; }
+        body.light { background-color: #ffffff; }
     </style>
 
     {{ $title := .Title | markdownify | default .Site.Title }}
