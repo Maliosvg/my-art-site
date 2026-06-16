@@ -1,233 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-	<meta name="generator" content="Hugo 0.157.0">
+	<meta name="generator" content="Hugo 0.157.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <title>bluesquare</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="个人博客">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="/css/main.min.dedf4a9b81fa62ab05d5c4431f1952edecff841baef85b126f78842838605418.css" integrity="sha256-3t9Km4H6YqsF1cRDHxlS7ez/hBuu&#43;FsSb3iEKDhgVBg=">
+    
+    <link id="dark-theme" rel="stylesheet" href="/css/dark.min.1f09ef627b6c844eedec511b9b55c2ec564ad0e7dc30aaa84918e42d0fbb7fc5.css" integrity="sha256-HwnvYntshE7t7FEbm1XC7FZK0OfcMKqoSRjkLQ&#43;7f8U=">
 
-         
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
-        html { cursor: none !important; }
-        
-         
-        .transition-fade {
-            transition: 0.2s;
-            opacity: 1;
-        }
-        html.is-animating .transition-fade {
-            opacity: 0;
-        }
-        html.is-leaving .transition-fade {
-            opacity: 0;
-        }
-        
-        @view-transition { navigation: auto; }
 
-        body {
-            background-color: #0a0b10;
-            color: #d8dbe2;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-         
-        #particle-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100vh;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-         
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes avatarGlow {
-            0%, 100% { box-shadow: 0 0 16px rgba(50,140,220,0.3), 0 0 40px rgba(50,140,220,0.08); }
-            50% { box-shadow: 0 0 24px rgba(50,140,220,0.5), 0 0 60px rgba(50,140,220,0.15); }
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes accentLine {
-            from { width: 0; opacity: 0; }
-            to { width: 36px; opacity: 1; }
-        }
-
-         
-        .page-wrapper {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 100px 24px 60px;
-        }
-
-        body.light, html[data-theme="light"] {
-            background-color: #ffffff;
-            color: #000000;
-        }
-
-        body.light .avatar img {
-            background-color: transparent;
-        }
-
-         
-        .home-about {
-            text-align: center;
-            margin-bottom: 64px;
-            animation: fadeInUp 0.7s ease-out 0.3s both;
-        }
-
-        .avatar img {
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(50,140,220,0.2);
-            background-color: #12141c;
-            animation: avatarGlow 3.5s ease-in-out infinite;
-            transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
-        }
-        .avatar img:hover {
-            transform: scale(1.06);
-            box-shadow: 0 0 35px rgba(50,140,220,0.55), 0 0 80px rgba(50,140,220,0.18);
-        }
-
-        h1 {
-            font-weight: 300;
-            letter-spacing: 0.25em;
-            margin-top: 28px;
-            text-transform: uppercase;
-            font-size: 1.6em;
-            background: linear-gradient(135deg, #d0d4dc 0%, #4a9eda 50%, #d0d4dc 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 0.7s ease-out 0.45s both, gradientShift 8s ease infinite;
-        }
-
-         
-        .title-accent {
-            width: 36px; height: 1.5px;
-            background: linear-gradient(90deg, rgba(50,140,220,0.7), rgba(50,140,220,0.05));
-            margin: 14px auto 0;
-            animation: accentLine 0.8s ease-out 0.6s both;
-        }
-
-        .subtitle {
-            font-weight: 200;
-            opacity: 0.35;
-            font-size: 0.92em;
-            margin-top: 12px;
-            letter-spacing: 0.08em;
-            animation: fadeInUp 0.7s ease-out 0.55s both;
-        }
-
-         
-        .home-posts {
-            width: 90%; max-width: 580px;
-            animation: fadeInUp 0.7s ease-out 0.65s both;
-        }
-
-        .section-title {
-            font-weight: 300;
-            font-size: 0.82em;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            padding-bottom: 12px;
-            margin-bottom: 6px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            color: rgba(255,255,255,0.3);
-        }
-        body.light .section-title {
-            color: rgba(0,0,0,0.8);
-            border-bottom: 1px solid rgba(0,0,0,0.15);
-        }
-
-        .post-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 16px;
-            border-radius: 8px;
-            margin-bottom: 2px;
-            transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
-            border: 1px solid transparent;
-        }
-        .post-item:hover {
-            background: rgba(50,140,220,0.04);
-            border-color: rgba(50,140,220,0.1);
-            transform: translateX(4px);
-        }
-        body.light .post-item:hover {
-            background: rgba(50,140,220,0.06);
-            border-color: rgba(50,140,220,0.15);
-        }
-
-        .post-item a {
-            color: rgba(180,200,230,0.85);
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 0.93em;
-            transition: color 0.2s ease;
-            letter-spacing: 0.01em;
-        }
-        body.light .post-item a {
-            color: rgba(20, 30, 40, 0.95);
-        }
-        .post-item:hover a { color: #4a9eda; }
-
-        .post-item time {
-            color: rgba(255,255,255,0.15);
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 0.78em;
-            flex-shrink: 0;
-            margin-left: 16px;
-        }
-        body.light .post-item time {
-            color: rgba(0,0,0,0.6);
-        }
-
-         
-        .home-footer {
-            margin-top: auto;
-            padding-top: 80px;
-            text-align: center;
-            font-size: 0.72em;
-            opacity: 0.2;
-            letter-spacing: 0.1em;
-            animation: fadeInUp 0.7s ease-out 0.8s both;
-        }
-
-         
-        .dashed-line {
-            flex-grow: 1; border-bottom: 1px dashed rgba(255, 255, 255, 0.15); margin: 0 16px; min-width: 20px; position: relative; top: 5px;
-        }
-        body.light .dashed-line { border-bottom: 1px dashed rgba(0, 0, 0, 0.15); }
-
-         
-        @media (max-width: 600px) {
-            .page-wrapper { padding-top: 60px; }
-            .avatar img { width: 80px; height: 80px; }
-            h1 { font-size: 1.3em; letter-spacing: 0.15em; }
-            .post-item { padding: 11px 12px; }
-            .post-item a { font-size: 0.88em; }
-        }
-    </style>
     <script src="https://unpkg.com/swup@4"></script>
     <script src="https://unpkg.com/@swup/head-plugin@2"></script>
     <script>
@@ -236,6 +22,20 @@
                 window.swup = new Swup({
                     containers: ["#swup-container"],
                     plugins: [new SwupHeadPlugin({ awaitAssets: true })]
+                });
+                
+                window.swup.hooks.before('content:replace', () => {
+                    window._savedThemePref = localStorage.getItem('theme-preference');
+                });
+                window.swup.hooks.on('content:replace', () => {
+                    const savedTheme = window._savedThemePref || localStorage.getItem('theme-preference');
+                    if (savedTheme === 'light') {
+                        document.body.classList.add('light');
+                        document.documentElement.setAttribute('data-theme', 'light');
+                    } else {
+                        document.body.classList.remove('light');
+                        document.documentElement.removeAttribute('data-theme');
+                    }
                 });
                 window.swup.hooks.on('page:view', () => {
                     const savedTheme = localStorage.getItem('theme-preference');
@@ -283,12 +83,12 @@
 body.light .app-sidebar {
     background: var(--sidebar-bg-light);
     border-right: 1px solid var(--sidebar-border-light);
-    color: var(--text-color);
+    color: inherit;
 }
 .app-sidebar {
     background: var(--sidebar-bg-dark);
     border-right: 1px solid var(--sidebar-border-dark);
-    color: var(--text-color); 
+    color: inherit; 
     position: fixed;
     top: 0;
     left: 0;
@@ -374,7 +174,7 @@ body.light .avatar-wrap { background: #d0d0d0; }
     font-weight: 700;
     margin: 0 0 5px;
     letter-spacing: 0.05em;
-    color: var(--text-color);
+    color: inherit;
 }
 .profile-desc {
     font-size: 11px;
@@ -395,7 +195,7 @@ body.light .profile-desc { color: var(--sidebar-text-muted-light); }
     display: flex;
     align-items: center;
     padding: 15px 30px;  
-    color: var(--text-color);
+    color: inherit;
     text-decoration: none;
     border-radius: 0;
     margin-bottom: 5px;
@@ -539,7 +339,7 @@ body.light .player-progress-wrap { background: rgba(0,0,0,0.1); }
 .player-btn {
     background: transparent;
     border: none;
-    color: var(--text-color);
+    color: inherit;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -626,6 +426,7 @@ body.light .playlist-item { color: var(--sidebar-text-muted-light); }
     color: var(--theme-blue);
     font-weight: bold;
 }
+.hidden { display: none; }
 
 
  
@@ -930,10 +731,233 @@ body.light .mobile-hamburger-btn {
 
 
 <div id="swup-container" class="transition-fade">
+    <style>
+
+
+         
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+        html { cursor: none !important; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; }
+        
+         
+        *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+        * { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+        
+         
+        .transition-fade {
+            transition: 0.2s;
+            opacity: 1;
+        }
+        html.is-animating .transition-fade {
+            opacity: 0;
+        }
+        html.is-leaving .transition-fade {
+            opacity: 0;
+        }
+
+        body {
+            background-color: #0a0b10;
+            color: #d8dbe2;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+         
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+         
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes avatarGlow {
+            0%, 100% { box-shadow: 0 0 16px rgba(50,140,220,0.3), 0 0 40px rgba(50,140,220,0.08); }
+            50% { box-shadow: 0 0 24px rgba(50,140,220,0.5), 0 0 60px rgba(50,140,220,0.15); }
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes accentLine {
+            from { width: 0; opacity: 0; }
+            to { width: 36px; opacity: 1; }
+        }
+
+         
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 24px 60px;
+        }
+
+        body.light, html[data-theme="light"] {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        body.light .avatar img {
+            background-color: transparent;
+        }
+
+         
+        .home-about {
+            text-align: center;
+            margin-bottom: 64px;
+            animation: fadeInUp 0.7s ease-out 0.3s both;
+        }
+
+        .avatar img {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(50,140,220,0.2);
+            background-color: #12141c;
+            animation: avatarGlow 3.5s ease-in-out infinite;
+            transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease;
+        }
+        .avatar img:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(50,140,220,0.55), 0 0 80px rgba(50,140,220,0.18);
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            margin-top: 28px;
+            text-transform: uppercase;
+            font-size: 1.6em;
+            background: linear-gradient(135deg, #d0d4dc 0%, #4a9eda 50%, #d0d4dc 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.7s ease-out 0.45s both, gradientShift 8s ease infinite;
+        }
+
+         
+        .title-accent {
+            width: 36px; height: 1.5px;
+            background: linear-gradient(90deg, rgba(50,140,220,0.7), rgba(50,140,220,0.05));
+            margin: 14px auto 0;
+            animation: accentLine 0.8s ease-out 0.6s both;
+        }
+
+        .subtitle {
+            font-weight: 200;
+            opacity: 0.35;
+            font-size: 0.92em;
+            margin-top: 12px;
+            letter-spacing: 0.08em;
+            animation: fadeInUp 0.7s ease-out 0.55s both;
+        }
+
+         
+        .home-posts {
+            width: 90%; max-width: 580px;
+            animation: fadeInUp 0.7s ease-out 0.65s both;
+        }
+
+        .section-title {
+            font-weight: 300;
+            font-size: 0.82em;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            padding-bottom: 12px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: rgba(255,255,255,0.3);
+        }
+        body.light .section-title {
+            color: rgba(0,0,0,0.8);
+            border-bottom: 1px solid rgba(0,0,0,0.15);
+        }
+
+        .post-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+            border: 1px solid transparent;
+        }
+        .post-item:hover {
+            background: rgba(50,140,220,0.04);
+            border-color: rgba(50,140,220,0.1);
+            transform: translateX(4px);
+        }
+        body.light .post-item:hover {
+            background: rgba(50,140,220,0.06);
+            border-color: rgba(50,140,220,0.15);
+        }
+
+        .post-item a {
+            color: rgba(180,200,230,0.85);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.93em;
+            transition: color 0.2s ease;
+            letter-spacing: 0.01em;
+        }
+        body.light .post-item a {
+            color: rgba(20, 30, 40, 0.95);
+        }
+        .post-item:hover a { color: #4a9eda; }
+
+        .post-item time {
+            color: rgba(255,255,255,0.15);
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.78em;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        body.light .post-item time {
+            color: rgba(0,0,0,0.6);
+        }
+
+         
+        .home-footer {
+            margin-top: auto;
+            padding-top: 80px;
+            text-align: center;
+            font-size: 0.72em;
+            opacity: 0.2;
+            letter-spacing: 0.1em;
+            animation: fadeInUp 0.7s ease-out 0.8s both;
+        }
+
+         
+        .dashed-line {
+            flex-grow: 1; border-bottom: 1px dashed rgba(255, 255, 255, 0.15); margin: 0 16px; min-width: 20px; position: relative; top: 5px;
+        }
+        body.light .dashed-line { border-bottom: 1px dashed rgba(0, 0, 0, 0.15); }
+
+         
+        @media (max-width: 600px) {
+            .page-wrapper { padding-top: 60px; }
+            .avatar img { width: 80px; height: 80px; }
+            h1 { font-size: 1.3em; letter-spacing: 0.15em; }
+            .post-item { padding: 11px 12px; }
+            .post-item a { font-size: 0.88em; }
+        }
+    </style>
 <div class="page-wrapper">
     <section class="home-about">
         <div class="avatar">
-            <img src="/images/avatar.jpg" alt="avatar" onerror="this.src='https://ui-avatars.com/api/?name=B&background=3498db&color=fff';">
+            <img src="/images/avatar.jpg" alt="avatar" style="width: 100px; height: 100px;" onerror="this.src='https://ui-avatars.com/api/?name=B&background=3498db&color=fff';">
         </div>
         <h1>bluesquare</h1>
         <div class="title-accent"></div>
@@ -1088,7 +1112,6 @@ body.light .theme-btn:hover {
 
 <style>
  
-@view-transition { navigation: auto; }
 
 @media (hover: hover) and (pointer: fine) {
     html, body, * {

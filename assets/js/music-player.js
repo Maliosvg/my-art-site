@@ -292,16 +292,16 @@
 
     function showLyrics() {
         showingList = false;
-        lyricsBox.style.display = 'block';
-        playlistBox.style.display = 'none';
+        lyricsBox.classList.remove('hidden');
+        playlistBox.classList.add('hidden');
         if (btnLyrics) btnLyrics.style.color = 'var(--theme-blue)';
         if (btnPlaylist) btnPlaylist.style.color = '';
     }
 
     function showPlaylist() {
         showingList = true;
-        lyricsBox.style.display = 'none';
-        playlistBox.style.display = 'block';
+        lyricsBox.classList.add('hidden');
+        playlistBox.classList.remove('hidden');
         if (btnPlaylist) btnPlaylist.style.color = 'var(--theme-blue)';
         if (btnLyrics) btnLyrics.style.color = '';
     }
@@ -311,7 +311,7 @@
         if (isPlaying) {
             audio.pause();
         } else {
-            if (!audio.src) {
+            if (!audio.getAttribute('src')) {
                 loadSong(currentIndex).then(() => audio.play());
             } else {
                 audio.play();

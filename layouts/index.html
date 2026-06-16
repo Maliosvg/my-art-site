@@ -6,7 +6,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{{ .Site.Params.description }}">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     {{ $cssMain := resources.Get "css/main.css" | minify | resources.Fingerprint "sha256" }}
     <link rel="stylesheet" type="text/css" href="{{ $cssMain.RelPermalink }}" integrity="{{ $cssMain.Data.Integrity }}">
     {{ $cssDark := resources.Get "css/dark.css" | minify | resources.Fingerprint "sha256" }}
@@ -65,7 +65,7 @@
 
 <div id="swup-container" class="transition-fade">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+
 
         /* ===== Reset & Cross-page Smoothing ===== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
@@ -86,8 +86,6 @@
         html.is-leaving .transition-fade {
             opacity: 0;
         }
-        
-        @view-transition { navigation: auto; }
 
         body {
             background-color: #0a0b10;

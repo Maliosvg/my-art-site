@@ -62,7 +62,8 @@
     {{ $cssDark := resources.Get "css/dark.css" | minify | resources.Fingerprint "sha256" }}
     <link id="dark-theme" rel="stylesheet" href="{{ $cssDark.RelPermalink }}" integrity="{{ $cssDark.Data.Integrity }}">
 
-    {{ $jsBundle := resources.Match "js/**.js" | resources.Concat "js/bundle.js" | minify | resources.Fingerprint "sha256" }}
+    {{ $jsFiles := slice (resources.Get "js/feather-icons.min.js") (resources.Get "js/svg-injector.min.js") (resources.Get "js/main.js") }}
+    {{ $jsBundle := $jsFiles | resources.Concat "js/bundle.js" | minify | resources.Fingerprint "sha256" }}
     <script src="{{ $jsBundle.RelPermalink }}" integrity="{{ $jsBundle.Data.Integrity }}"></script>
 
     {{ range .AlternativeOutputFormats }}

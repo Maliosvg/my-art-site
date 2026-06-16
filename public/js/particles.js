@@ -38,6 +38,8 @@
   let danmakuEnabled = false;
 
   function initDanmaku() {
+    danmakuItems = [];
+    danmakuEnabled = false;
     const postContent = document.querySelector('.post-content');
     if (!postContent) return;
     danmakuEnabled = true;
@@ -45,18 +47,21 @@
     const chunks = text.split(/[。！？\n.!?]+/).filter(function(s) { return s.trim().length > 2 && s.trim().length < 40; });
     if (chunks.length === 0) return;
 
-    var count = Math.min(chunks.length, 25);
+    var count = Math.min(chunks.length, 30);
+    let lanes = Math.floor(height / 40) - 2;
+    if (lanes < 1) lanes = 1;
+    
     for (var i = 0; i < count; i++) {
-      let angle = (Math.random() - 0.5) * 40 * (Math.PI / 180); // -20 to 20 degrees
-      let speed = 0.5 + Math.random() * 0.8;
+      let speed = 0.8 + Math.random() * 1.5;
+      let lane = i % lanes;
       danmakuItems.push({
         text: chunks[i].trim(),
-        x: width + Math.random() * width * 0.8,
-        y: 60 + Math.random() * (height - 120),
-        vx: -Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed,
-        opacity: 0.12 + Math.random() * 0.15, // Increased brightness
-        fontSize: 16 + Math.random() * 8, // Increased size
+        x: width + Math.random() * width,
+        y: 80 + lane * 40 + (Math.random() * 10 - 5),
+        vx: -speed,
+        baseOpacity: 0.15 + Math.random() * 0.2, 
+        opacity: 0,
+        fontSize: 14 + Math.random() * 10,
       });
     }
   }
@@ -66,20 +71,35 @@
     for (var i = 0; i < danmakuItems.length; i++) {
       var d = danmakuItems[i];
       d.x += d.vx;
-      d.y += d.vy;
-      if (d.x < -600 || d.y < -100 || d.y > height + 100) {
+      
+      // Reset when off screen
+      if (d.x < -600) {
         d.x = width + Math.random() * 300;
-        d.y = 60 + Math.random() * (height - 120);
+        let lanes = Math.floor(height / 40) - 2;
+        if (lanes < 1) lanes = 1;
+        d.y = 80 + Math.floor(Math.random() * lanes) * 40;
+      }
+      
+      // Interactive opacity
+      let dx = d.x - mouse.x;
+      let dy = d.y - mouse.y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 150) {
+        d.opacity = Math.min(d.opacity + 0.05, d.baseOpacity + 0.4);
+      } else {
+        d.opacity = Math.max(d.opacity - 0.02, d.baseOpacity);
       }
     }
   }
 
   function drawDanmaku() {
     if (!danmakuEnabled) return;
+    let isDark = checkDarkMode();
     for (var i = 0; i < danmakuItems.length; i++) {
       var d = danmakuItems[i];
       ctx.font = d.fontSize + 'px "Inter", sans-serif';
-      ctx.fillStyle = 'rgba(100, 160, 255, ' + d.opacity + ')';
+      let rgb = isDark ? '200, 220, 255' : '50, 100, 200';
+      ctx.fillStyle = 'rgba(' + rgb + ', ' + d.opacity + ')';
       ctx.fillText(d.text, d.x, d.y);
     }
   }
@@ -434,6 +454,16 @@
     resize();
     initParticles();
     initDanmaku();
+    
+    if (window.swup && window.swup.hooks) {
+        window.swup.hooks.on('page:view', initDanmaku);
+    } else {
+        setTimeout(function() {
+            if (window.swup && window.swup.hooks) {
+                window.swup.hooks.on('page:view', initDanmaku);
+            }
+        }, 1000);
+    }
 
     window.addEventListener('resize', function () {
       resize();
